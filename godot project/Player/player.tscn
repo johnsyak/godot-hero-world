@@ -1,11 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://cbsptxb38q668"]
+[gd_scene load_steps=14 format=3 uid="uid://cbsptxb38q668"]
 
 [ext_resource type="Texture2D" uid="uid://c207wnffvir48" path="res://art/Player SpriteSheet.png" id="1_vwhka"]
 
 [sub_resource type="GDScript" id="GDScript_usmdi"]
 script/source = "extends CharacterBody2D
 
-@export var speed: int = 35
+@export var speed: int = 0
 @onready var animations = $AnimationPlayer
 @onready var lastDirection:String = \"Down\"
 
@@ -203,10 +203,14 @@ _data = {
 "walkUp": SubResource("Animation_wddnt")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hyq2f"]
+size = Vector2(14, 4)
+
 [node name="Player" type="CharacterBody2D"]
 z_index = 1
 y_sort_enabled = true
 script = SubResource("GDScript_usmdi")
+speed = 60
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(70, 67)
@@ -218,3 +222,7 @@ vframes = 7
 libraries = {
 "": SubResource("AnimationLibrary_lx43j")
 }
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(70, 73)
+shape = SubResource("RectangleShape2D_hyq2f")
