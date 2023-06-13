@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://68ww6m0mgatg"
-path="res://.godot/imported/Slime.png-d4bf994dc6d99172677dbbf2a2019c9d.ctex"
+uid="uid://3wmcbgcqhrte"
+path="res://.godot/imported/lizard.png-95d462db35eb6651b8664ab0169a890e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://enemies/Slime.png"
-dest_files=["res://.godot/imported/Slime.png-d4bf994dc6d99172677dbbf2a2019c9d.ctex"]
+source_file="res://enemies/lizard/lizard.png"
+dest_files=["res://.godot/imported/lizard.png-95d462db35eb6651b8664ab0169a890e.ctex"]
 
 [params]
 

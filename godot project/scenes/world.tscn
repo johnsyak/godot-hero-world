@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://dfaestbwx1x0x" path="res://art/TilesetNature.png" id="2_dnigq"]
 [ext_resource type="Texture2D" uid="uid://4b0tqchhjyt3" path="res://art/animatedFlower.png" id="3_cfjkr"]
 [ext_resource type="Script" path="res://scenes/follow cam.gd" id="5_cv8fh"]
-[ext_resource type="PackedScene" uid="uid://cyq4hr81ki25m" path="res://enemies/slime.tscn" id="6_mubgd"]
+[ext_resource type="PackedScene" uid="uid://bb7267l7wbabg" path="res://enemies/lizard/lizard.tscn" id="7_qofcw"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_eplj6"]
 texture = ExtResource("1_atja7")
@@ -2235,5 +2235,5 @@ position = Vector2(70, 69)
 script = ExtResource("5_cv8fh")
 tilemap = NodePath("../..")
 
-[node name="slime" parent="TileMap" instance=ExtResource("6_mubgd")]
-position = Vector2(114, 91)
+[node name="Lizard" parent="TileMap" instance=ExtResource("7_qofcw")]
+position = Vector2(124, 60)

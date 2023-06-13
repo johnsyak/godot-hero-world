@@ -5,20 +5,21 @@ extends CharacterBody2D
 
 @onready var animations = $AnimatedSprite2D
 
+var lastDirection = "Down"
 var startPosition
 var endPosition
+var tetherPosition
 
 var rng = RandomNumberGenerator.new()
 
 func _ready():
 	startPosition = position
-	print("startPositionX:" + str(startPosition.x).pad_decimals(5) + " , startPositionY:" + str(startPosition.y).pad_decimals(5) )
+	tetherPosition = position
 	rng.randomize()
 	var randPosX = rng.randi_range(-3, 3)
 	var randPosY = rng.randi_range(-3, 3)
-	print("X:" + str(randPosX))
-	print("Y:"+str(randPosY))
-	endPosition = startPosition + Vector2(randPosX*16, randPosY*16)
+
+	endPosition = startPosition - Vector2(randPosX*16, randPosY*16)
 
 	
 func updateVelocity():
@@ -30,12 +31,29 @@ func updateVelocity():
 func changeDirection():
 	var tempEnd = endPosition
 	endPosition = startPosition
+	var maxPosition = tetherPosition + Vector2(6*16, 6*16)
+	print("tempEndX"+str(tempEnd.x))
+	print("tempEndY"+str(tempEnd.y))
+	if tempEnd > tetherPosition:
+		tempEnd = position - Vector2(tetherPosition.x, tetherPosition.y)
+		print("endPosX:"+str(endPosition.x))
+		print("endPosy:"+str(endPosition.y))
+	else:
+		var randPosX = rng.randi_range(-2, 2)
+		var randPosY = rng.randi_range(-2, 2)
+		tempEnd = endPosition - Vector2(randPosX*16, randPosY*16)
+	
+	
 	startPosition = tempEnd
 
 func updateAnimation():
 	var animationString = "walkUp"
 	if velocity.y > 0:
 		animationString = "walkDown"
+	if velocity.x < 0:
+		animationString = "walkLeft"
+	if velocity.x > 0: 
+		animationString = "walkRight"
 
 	animations.play(animationString)
 	
