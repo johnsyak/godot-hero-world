@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 @export var speed = 25
 @export var limit = 0.5
-@export var tetherMax = 5
+@export var tetherMax = 2*16
 
 @onready var animations = $AnimatedSprite2D
 
@@ -17,8 +17,8 @@ func _ready():
 	startPos = tetherPos
 	endPos = startPos + Vector2(0, 3*16)
 	rng.randomize()
-	var randPosX = rng.randi_range(-3, 3)
-	var randPosY = rng.randi_range(-3, 3)
+	var randPosX = rng.randi_range(-2, 2)
+	var randPosY = rng.randi_range(-2, 2)
 
 	endPos = startPos - Vector2(randPosX*16, randPosY*16)
 
@@ -33,19 +33,20 @@ func updateVelocity():
 	
 func changeDirection():
 	var tempEnd = endPos
-	endPos = startPos
-	if(startPos.x > 0 and startPos.x > (tetherPos.x + tetherMax)):
-		startPos = tempEnd + Vector2(4*16, 0)
-	elif(startPos.x < 0 and startPos.x < (tetherPos.x + -tetherMax)):
-		startPos = tempEnd - Vector2(4*16, 0)
-	elif(startPos.y < 0 and startPos.y < (tetherPos.y + -tetherMax)):
-		startPos = tempEnd - Vector2(0, 4*16)
-	elif(startPos.y > 0 and startPos.y > (tetherPos.y + tetherMax)):
-		startPos = tempEnd + Vector2(0, 4*16)
+	var posDif
+	var tether = Vector2((tetherPos.x + tetherMax), (tetherPos.y + tetherMax))
+	#endPos = startPos
+	if(startPos.x > 0 and startPos.x > tether.x):
+		startPos = tetherPos
+	elif(startPos.y > 0 and startPos.y > tether.y):
+		startPos = tetherPos
+	elif(startPos.x < 0 and startPos.x < (tetherPos.x + -abs(tether.x))):
+		startPos = tetherPos
+	elif(startPos.y < 0 and startPos.y < (tetherPos.y + -abs(tether.y))):
+		startPos = tetherPos
 	else:
-		var randPosX = rng.randi_range(-2, 2)
-		var randPosY = rng.randi_range(-2, 2)
-		startPos = tempEnd - Vector2(randPosX*16, randPosY*16)
+		startPos = tempEnd - Vector2((rng.randi_range(-2, 2))*16, (rng.randi_range(-2, 2))*16)
+	endPos = startPos
 
 func updateAnimation():
 	var animationString = "walkUp"
