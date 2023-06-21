@@ -1,6 +1,7 @@
-[gd_scene load_steps=14 format=3 uid="uid://cbsptxb38q668"]
+[gd_scene load_steps=15 format=3 uid="uid://cbsptxb38q668"]
 
 [ext_resource type="Texture2D" uid="uid://c207wnffvir48" path="res://art/Player SpriteSheet.png" id="1_vwhka"]
+[ext_resource type="PackedScene" uid="uid://cdt3kvl0js1r2" path="res://overlap/hurtbox.tscn" id="2_wcoyr"]
 
 [sub_resource type="GDScript" id="GDScript_usmdi"]
 script/source = "extends CharacterBody2D
@@ -209,11 +210,12 @@ size = Vector2(14, 4)
 [node name="Player" type="CharacterBody2D"]
 z_index = 1
 y_sort_enabled = true
+position = Vector2(159, 81)
 script = SubResource("GDScript_usmdi")
 speed = 60
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(70, 67)
+position = Vector2(-159, -89)
 texture = ExtResource("1_vwhka")
 hframes = 4
 vframes = 7
@@ -224,5 +226,12 @@ libraries = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(70, 73)
+position = Vector2(-159, -84)
 shape = SubResource("RectangleShape2D_hyq2f")
+
+[node name="Hurtbox" parent="." instance=ExtResource("2_wcoyr")]
+
+[node name="CollisionShape2D" parent="Hurtbox" index="0"]
+position = Vector2(-159, -88)
+
+[editable path="Hurtbox"]
