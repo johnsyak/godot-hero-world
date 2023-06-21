@@ -37,13 +37,13 @@ func changeDirection():
 	var tether = Vector2((tetherPos.x + tetherMax), (tetherPos.y + tetherMax))
 	#endPos = startPos
 	if(startPos.x > 0 and startPos.x > tether.x):
-		startPos = tetherPos
+		resetPos()
 	elif(startPos.y > 0 and startPos.y > tether.y):
-		startPos = tetherPos
+		resetPos()
 	elif(startPos.x < 0 and startPos.x < (tetherPos.x + -abs(tether.x))):
-		startPos = tetherPos
+		resetPos()
 	elif(startPos.y < 0 and startPos.y < (tetherPos.y + -abs(tether.y))):
-		startPos = tetherPos
+		resetPos()
 	else:
 		startPos = tempEnd - Vector2((rng.randi_range(-2, 2))*16, (rng.randi_range(-2, 2))*16)
 	endPos = startPos
@@ -58,7 +58,17 @@ func updateAnimation():
 		animationString = "walkRight"
 	animations.play(animationString)
 	
+func handleCollision():
+	for i in get_slide_collision_count():
+		var collision = get_slide_collision(i)
+		var collider = collision.get_collider()
+		changeDirection()
+	
 func _physics_process(delta):
 	updateVelocity()
 	move_and_slide()
+	handleCollision()
 	updateAnimation()
+	
+func resetPos():
+	startPos = tetherPos
