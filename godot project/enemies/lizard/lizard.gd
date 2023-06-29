@@ -5,12 +5,16 @@ extends CharacterBody2D
 @export var tetherMax = 2*16
 
 @onready var animations = $AnimatedSprite2D
+@onready var lizardRaycast = $LizardRaycast
 
 var tetherPos
 var startPos
 var endPos
 
 var rng = RandomNumberGenerator.new()
+
+func _process(delta):
+	print(lizardRaycast.is_colliding)
 
 func _ready():
 	tetherPos = position
@@ -69,6 +73,11 @@ func _physics_process(delta):
 	move_and_slide()
 	handleCollision()
 	updateAnimation()
+
 	
 func resetPos():
 	startPos = tetherPos
+	
+
+	
+	
