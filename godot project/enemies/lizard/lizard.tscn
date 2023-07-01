@@ -1,7 +1,8 @@
-[gd_scene load_steps=21 format=3 uid="uid://u6nx76c4dwew"]
+[gd_scene load_steps=22 format=3 uid="uid://u6nx76c4dwew"]
 
 [ext_resource type="Script" path="res://enemies/lizard/lizard.gd" id="1_4ynd1"]
 [ext_resource type="Texture2D" uid="uid://3wmcbgcqhrte" path="res://enemies/lizard/lizard.png" id="2_uap12"]
+[ext_resource type="Script" path="res://enemies/lizard/LizardRaycast.gd" id="3_gw63s"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2ix1v"]
 atlas = ExtResource("2_uap12")
@@ -143,6 +144,7 @@ size = Vector2(16, 4)
 
 [node name="Lizard" type="CharacterBody2D"]
 script = ExtResource("1_4ynd1")
+metadata/velocity = 0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -8)
@@ -156,5 +158,6 @@ shape = SubResource("RectangleShape2D_0j4xy")
 
 [node name="LizardRaycast" type="RayCast2D" parent="."]
 modulate = Color(0, 1, 0, 1)
-target_position = Vector2(-100, 0)
+position = Vector2(0, -6)
 collision_mask = 6
+script = ExtResource("3_gw63s")

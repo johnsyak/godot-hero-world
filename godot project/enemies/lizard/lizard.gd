@@ -13,9 +13,6 @@ var endPos
 
 var rng = RandomNumberGenerator.new()
 
-func _process(delta):
-	print(lizardRaycast.is_colliding)
-
 func _ready():
 	tetherPos = position
 	startPos = tetherPos
@@ -54,12 +51,20 @@ func changeDirection():
 
 func updateAnimation():
 	var animationString = "walkUp"
+	var velocityX = abs(velocity.x)
+	var velocityY = abs(velocity.y)
+	if velocity.y < 0:
+		if velocityY > velocityX:
+			animationString = "walkUp"
 	if velocity.y > 0:
-		animationString = "walkDown"
+		if velocityY > velocityX:
+			animationString = "walkDown"
 	if velocity.x < 0:
-		animationString = "walkLeft"
-	if velocity.x > 0: 
-		animationString = "walkRight"
+		if(velocityX > velocityY):
+			animationString = "walkLeft"
+	if velocity.x > 0:
+		if velocityX > velocityY:
+			animationString = "walkRight"
 	animations.play(animationString)
 	
 func handleCollision():

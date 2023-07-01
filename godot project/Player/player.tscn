@@ -6,7 +6,7 @@
 [sub_resource type="GDScript" id="GDScript_usmdi"]
 script/source = "extends CharacterBody2D
 
-@export var speed: int = 0
+@export var speed: int = 0 
 @onready var animations = $AnimationPlayer
 @onready var lastDirection:String = \"Down\"
 @onready var PlayerRaycast = $PlayerRaycast
