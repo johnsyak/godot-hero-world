@@ -2237,6 +2237,12 @@ position = Vector2(-159, -85)
 script = ExtResource("5_cv8fh")
 tilemap = NodePath("../..")
 
-[node name="Lizard" parent="TileMap" instance=ExtResource("7_qofcw")]
+[node name="Lizard" parent="TileMap" groups=["Enemies"] instance=ExtResource("7_qofcw")]
 y_sort_enabled = true
 position = Vector2(126, 59)
+
+[node name="Lizard2" parent="TileMap" groups=["Enemies"] instance=ExtResource("7_qofcw")]
+position = Vector2(102, 132)
+
+[node name="Lizard3" parent="TileMap" groups=["Enemies"] instance=ExtResource("7_qofcw")]
+position = Vector2(196, 143)
