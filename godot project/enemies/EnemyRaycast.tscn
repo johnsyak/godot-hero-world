@@ -1,9 +1,9 @@
 [gd_scene load_steps=2 format=3 uid="uid://csrubj1m80hl3"]
 
-[ext_resource type="Script" path="res://enemies/lizard/LizardRaycast.gd" id="1_4y75b"]
+[ext_resource type="Script" path="res://enemies/lizard/LizardRaycast.gd" id="1_r7c3w"]
 
-[node name="LizardRaycast" type="RayCast2D"]
+[node name="EnemyRaycast" type="RayCast2D"]
 modulate = Color(0, 1, 0, 1)
 position = Vector2(0, -6)
 collision_mask = 6
-script = ExtResource("1_4y75b")
+script = ExtResource("1_r7c3w")

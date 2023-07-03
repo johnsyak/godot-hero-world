@@ -14,8 +14,10 @@ script/source = "extends CharacterBody2D
 func handleInput():
 	var moveDirection = Input.get_vector(\"ui_left\", \"ui_right\", \"ui_up\", \"ui_down\")
 	velocity = moveDirection*speed
+	#if(Input.is_action_pressed())
 	
 func updateAnimation():
+	pass
 
 	var direction =\"Down\"
 

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://enemies/lizard/lizard.gd" id="1_4ynd1"]
 [ext_resource type="Texture2D" uid="uid://3wmcbgcqhrte" path="res://enemies/lizard/lizard.png" id="2_uap12"]
-[ext_resource type="Script" path="res://enemies/lizard/LizardRaycast.gd" id="3_gw63s"]
+[ext_resource type="PackedScene" uid="uid://csrubj1m80hl3" path="res://enemies/EnemyRaycast.tscn" id="3_u75qj"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2ix1v"]
 atlas = ExtResource("2_uap12")
@@ -156,8 +156,4 @@ y_sort_enabled = true
 position = Vector2(0, -2)
 shape = SubResource("RectangleShape2D_0j4xy")
 
-[node name="LizardRaycast" type="RayCast2D" parent="."]
-modulate = Color(0, 1, 0, 1)
-position = Vector2(0, -6)
-collision_mask = 6
-script = ExtResource("3_gw63s")
+[node name="EnemyRaycast" parent="." instance=ExtResource("3_u75qj")]

@@ -3,53 +3,51 @@ extends CharacterBody2D
 @export var speed = 25
 @export var limit = 0.5
 @export var tetherMax = 2*16
+@export var tile_move_dist = 3
 
 @onready var animations = $AnimatedSprite2D
-@onready var lizardRaycast = $LizardRaycast
+@onready var enemy_raycast = $EnemyRaycast
 
 var tetherPos
 var startPos
 var endPos
-
 var rng = RandomNumberGenerator.new()
+var CONST_TILE_SIZE = 16
 
 func _ready():
+	#EnemyRaycast._on_enemy_raycast_fire.connect(_on_enemy_raycast_fire)
 	tetherPos = position
 	startPos = tetherPos
-	endPos = startPos + Vector2(0, 3*16)
+	endPos = startPos + Vector2(0, tile_move_dist * CONST_TILE_SIZE)
 	rng.randomize()
-	var randPosX = rng.randi_range(-2, 2)
-	var randPosY = rng.randi_range(-2, 2)
+	endPos = startPos - Vector2(_get_rand_range_threshold() * CONST_TILE_SIZE, _get_rand_range_threshold() * CONST_TILE_SIZE)
 
-	endPos = startPos - Vector2(randPosX*16, randPosY*16)
-
-func updateVelocity():
+func _update_velocity():
 	var moveDirection = endPos - position
 
 	if moveDirection.length() < limit:
 		position = endPos
-		changeDirection()
+		_changeDirection()
 	
 	velocity = moveDirection.normalized()*speed
 	
-func changeDirection():
+func _changeDirection():
 	var tempEnd = endPos
-	var posDif
 	var tether = Vector2((tetherPos.x + tetherMax), (tetherPos.y + tetherMax))
-	#endPos = startPos
+
 	if(startPos.x > 0 and startPos.x > tether.x):
-		resetPos()
+		_resetPos()
 	elif(startPos.y > 0 and startPos.y > tether.y):
-		resetPos()
+		_resetPos()
 	elif(startPos.x < 0 and startPos.x < (tetherPos.x + -abs(tether.x))):
-		resetPos()
+		_resetPos()
 	elif(startPos.y < 0 and startPos.y < (tetherPos.y + -abs(tether.y))):
-		resetPos()
+		_resetPos()
 	else:
-		startPos = tempEnd - Vector2((rng.randi_range(-2, 2))*16, (rng.randi_range(-2, 2))*16)
+		startPos = tempEnd - Vector2((_get_rand_range_threshold()) * CONST_TILE_SIZE, (_get_rand_range_threshold()) * CONST_TILE_SIZE)
 	endPos = startPos
 
-func updateAnimation():
+func update_animation():
 	var animationString = "walkUp"
 	var velocityX = abs(velocity.x)
 	var velocityY = abs(velocity.y)
@@ -67,22 +65,27 @@ func updateAnimation():
 			animationString = "walkRight"
 	animations.play(animationString)
 	
-func handleCollision():
+func _handle_collision():
 	for i in get_slide_collision_count():
 		var collision = get_slide_collision(i)
 		var collider = collision.get_collider()
-		changeDirection()
+		_changeDirection()
 	
 func _physics_process(delta):
-	updateVelocity()
+	_update_velocity()
 	move_and_slide()
-	handleCollision()
-	updateAnimation()
+	_handle_collision()
+	update_animation()
 
-	
-func resetPos():
+func _resetPos():
 	startPos = tetherPos
-	
 
+func _on_enemy_raycast_fire():
+	print("LIZURD FIRE")
 	
+func _get_rand_range_threshold():
+	return rng.randi_range(-tile_move_dist, tile_move_dist)
 	
+func _process(delta):
+	if(enemy_raycast.is_colliding()):
+		_on_enemy_raycast_fire()
