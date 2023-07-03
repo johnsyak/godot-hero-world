@@ -32,12 +32,10 @@ func changeDirection():
 	var tempEnd = endPosition
 	endPosition = startPosition
 	var maxPosition = tetherPosition + Vector2(6*16, 6*16)
-	print("tempEndX"+str(tempEnd.x))
-	print("tempEndY"+str(tempEnd.y))
+
 	if tempEnd > tetherPosition:
 		tempEnd = position - Vector2(tetherPosition.x, tetherPosition.y)
-		print("endPosX:"+str(endPosition.x))
-		print("endPosy:"+str(endPosition.y))
+
 	else:
 		var randPosX = rng.randi_range(-2, 2)
 		var randPosY = rng.randi_range(-2, 2)

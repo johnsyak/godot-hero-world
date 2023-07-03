@@ -15,23 +15,18 @@ func _process(delta):
 	
 func _adjust_direction():
 	var parent = get_parent()
-	var velocityX = abs(parent.velocity.x)
-	var velocityY = abs(parent.velocity.y)
-	var vx = parent.velocity.x
-	var vy = parent.velocity.y
+	var parent_vector = Vector2(abs(parent.velocity.x), abs(parent.velocity.y))
 	if parent.velocity.x < 0:
-		if velocityX > velocityY:
-			_set_target_positions(0, -_raycast_range)
+		if parent_vector.x > parent_vector.y:
+			target_position = Vector2(-_raycast_range, 0)
 	if parent.velocity.x > 0:
-		if velocityX > velocityY:
-			_set_target_positions(0, _raycast_range)
+		if parent_vector.x > parent_vector.y:
+			target_position = Vector2(_raycast_range, 0)
 	if parent.velocity.y < 0:
-		if velocityY > velocityX:
-			_set_target_positions(-_raycast_range, 0)
+		if parent_vector.y > parent_vector.x:
+			target_position = Vector2(0, -_raycast_range)
 	if(parent.velocity.y > 0):
-		if velocityY > velocityX:
-			_set_target_positions(_raycast_range, 0)
-			
-func _set_target_positions(value1, value2):
-	target_position.y = value1
-	target_position.x = value2
+		if parent_vector.y > parent_vector.x:
+			target_position = Vector2(0, _raycast_range)
+
+
