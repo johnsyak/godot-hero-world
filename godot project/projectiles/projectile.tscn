@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://bj0263qivc00q"]
+
+[ext_resource type="Texture2D" uid="uid://bpflpfnagkjk8" path="res://projectiles/freball/Fireball.png" id="1_lg8sw"]
+[ext_resource type="Script" path="res://projectiles/projectile.gd" id="1_msxul"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_w8t56"]
+radius = 5.0
+
+[node name="Projectile" type="Area2D"]
+script = ExtResource("1_msxul")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("1_lg8sw")
+offset = Vector2(1, 1)
+hframes = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_w8t56")
+debug_color = Color(0.968627, 0.121569, 0, 0.419608)
