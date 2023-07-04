@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-@export var speed = 0
+@export var speed = 30
 @export var limit = 0.5
 @export var tether_max = 2
 @export var tile_move_dist = 3
@@ -48,19 +48,18 @@ func _change_direction():
 
 func _update_animation():
 	var animationString = "walk_up"
-	var velocityX = abs(velocity.x)
-	var velocityY = abs(velocity.y)
+	var normalized_velocity = Vector2(abs(velocity.x), abs(velocity.y))
 	if velocity.y < 0:
-		if velocityY > velocityX:
+		if normalized_velocity.y > normalized_velocity.x:
 			animationString = "walk_up"
-	if velocity.y > 0:
-		if velocityY > velocityX:
+	elif velocity.y > 0:
+		if normalized_velocity.y > normalized_velocity.x:
 			animationString = "walk_down"
 	if velocity.x < 0:
-		if(velocityX > velocityY):
+		if(normalized_velocity.x > normalized_velocity.y):
 			animationString = "walk_left"
 	if velocity.x > 0:
-		if velocityX > velocityY:
+		if normalized_velocity.x > normalized_velocity.y:
 			animationString = "walk_right"
 	animations.play(animationString)
 	
@@ -85,13 +84,14 @@ func _get_rand_range_threshold():
 var _timer = 0
 
 func _process(delta):
-	if(enemy_raycast.is_colliding()):
-		if _timer == 0:
-			_on_enemy_raycast_fire()
-		elif (_timer>fire_rate):
-			_on_enemy_raycast_fire()
-			_timer = 0
-		_timer+=delta
+	if(!enemy_raycast.is_colliding()):
+		return
+	if _timer == 0:
+		_on_enemy_raycast_fire()
+	elif (_timer>fire_rate):
+		_on_enemy_raycast_fire()
+		_timer = 0
+	_timer+=delta
 #	else:
 #		_timer = 0
 func _on_enemy_raycast_fire() -> void:
@@ -99,10 +99,9 @@ func _on_enemy_raycast_fire() -> void:
 	var projectile = projectilePath.instantiate() 
 	get_parent().add_child(projectile)
 	projectile.position = $Marker2D.global_position
+	projectile.velocity = Vector2(100,0)
 #	var inst = projectile.instantiate()
 #	owner.add_child(inst)
 #	inst.transform = get_node("Marker2D").global_transform
-
-
 
 
