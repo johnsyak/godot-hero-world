@@ -98,8 +98,8 @@ func _on_enemy_raycast_fire() -> void:
 	print("Lizurd fire!")
 	var projectile = projectilePath.instantiate() 
 	get_parent().add_child(projectile)
-	projectile.position = $Marker2D.global_position
-	projectile.velocity = Vector2(100,0)
+#	projectile.position = $Marker2D.global_position
+#	projectile.velocity = Vector2(100,0)
 #	var inst = projectile.instantiate()
 #	owner.add_child(inst)
 #	inst.transform = get_node("Marker2D").global_transform
