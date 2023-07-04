@@ -4,10 +4,11 @@ extends CharacterBody2D
 @export var limit = 0.5
 @export var tether_max = 2
 @export var tile_move_dist = 3
-@export var fire_rate = 1
+@export var fire_rate = 0.4
 
 @onready var animations = $AnimatedSprite2D
 @onready var enemy_raycast = $EnemyRaycast
+const projectilePath = preload("res://projectiles/projectile.tscn")
 
 var _tether_pos
 var _start_pos
@@ -24,11 +25,11 @@ func _ready():
 	_end_pos = _start_pos - Vector2(_get_rand_range_threshold() * _CONST_TILE_SIZE, _get_rand_range_threshold() * _CONST_TILE_SIZE)
 
 func _update_velocity():
-	var move_direction = _end_pos - position
-	if move_direction.length() < limit:
+	var moveDirection = _end_pos - position
+	if moveDirection.length() < limit:
 		position = _end_pos
 		_change_direction()
-	velocity = move_direction.normalized()*speed
+	velocity = moveDirection.normalized()*speed
 	
 func _change_direction():
 	var tempEnd = _end_pos
@@ -45,20 +46,21 @@ func _change_direction():
 		_start_pos = tempEnd - Vector2((_get_rand_range_threshold()) * _CONST_TILE_SIZE, (_get_rand_range_threshold()) * _CONST_TILE_SIZE)
 	_end_pos = _start_pos
 
-func update_animation():
+func _update_animation():
 	var animationString = "walk_up"
-	var normalized_velocity = Vector2(abs(velocity.x), abs(velocity.y))
+	var velocityX = abs(velocity.x)
+	var velocityY = abs(velocity.y)
 	if velocity.y < 0:
-		if normalized_velocity.y > normalized_velocity.x:
+		if velocityY > velocityX:
 			animationString = "walk_up"
 	if velocity.y > 0:
-		if normalized_velocity.y> normalized_velocity.x:
+		if velocityY > velocityX:
 			animationString = "walk_down"
 	if velocity.x < 0:
-		if normalized_velocity.x > normalized_velocity.y:
+		if(velocityX > velocityY):
 			animationString = "walk_left"
 	if velocity.x > 0:
-		if normalized_velocity.x > normalized_velocity.y:
+		if velocityX > velocityY:
 			animationString = "walk_right"
 	animations.play(animationString)
 	
@@ -72,14 +74,11 @@ func _physics_process(delta):
 	_update_velocity()
 	move_and_slide()
 	_handle_collision()
-	update_animation()
+	_update_animation()
 
 func _resetPos():
 	_start_pos = _tether_pos
 
-func _on_enemy_raycast_fire():
-	print("LIZURD FIRE")
-	
 func _get_rand_range_threshold():
 	return _rng.randi_range(-tile_move_dist, tile_move_dist)
 
@@ -95,6 +94,14 @@ func _process(delta):
 		_timer+=delta
 #	else:
 #		_timer = 0
+func _on_enemy_raycast_fire() -> void:
+	print("Lizurd fire!")
+	var projectile = projectilePath.instantiate() 
+	get_parent().add_child(projectile)
+	projectile.position = $Marker2D.global_position
+#	var inst = projectile.instantiate()
+#	owner.add_child(inst)
+#	inst.transform = get_node("Marker2D").global_transform
 
 
 
