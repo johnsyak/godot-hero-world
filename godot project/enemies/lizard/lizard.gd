@@ -61,7 +61,7 @@ func _physics_process(delta):
 	_handle_collision()
 	_update_animation()
 
-func _resetPos():
+func _resetPos() -> void:
 	_start_pos = _tether_pos
 
 func _get_rand_range_threshold():
@@ -96,13 +96,12 @@ func _process(delta):
 		_on_enemy_raycast_fire()
 		_timer = 0
 	_timer+=delta
-#	else:
-#		_timer = 0
+
 func _on_enemy_raycast_fire() -> void:
-	print("Lizurd fire!")
 	var projectile = projectilePath.instantiate() 
 	get_parent().add_child(projectile)
-	projectile.position = $Marker2D.global_position
+	var start_position = $Marker2D.global_position
+	projectile.position = start_position
 	var direction = _get_direction()
 	var fire_direction
 	match direction:
@@ -115,5 +114,8 @@ func _on_enemy_raycast_fire() -> void:
 		"walk_right":
 			fire_direction = Vector2(-1, 0)
 	projectile.velocity = fire_direction
+	if(projectile.position.x > start_position.x + 10 or projectile.position.y > start_position.y + 10 ):
+		projectile.queue_free()
+
 	
 
