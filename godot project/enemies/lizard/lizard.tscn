@@ -148,6 +148,7 @@ fire_rate = 0.6
 metadata/velocity = 0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = 1
 position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_m4ows")
 animation = &"walk_right"
@@ -160,6 +161,7 @@ shape = SubResource("RectangleShape2D_0j4xy")
 [node name="EnemyRaycast" parent="." instance=ExtResource("3_u75qj")]
 target_position = Vector2(100, 0)
 collide_with_areas = true
+_raycast_range = 150
 
 [node name="Marker2D" type="Marker2D" parent="."]
 position = Vector2(0, -6)

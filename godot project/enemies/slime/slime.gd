@@ -15,11 +15,7 @@ var rng = RandomNumberGenerator.new()
 func _ready():
 	startPosition = position
 	tetherPosition = position
-	rng.randomize()
-	var randPosX = rng.randi_range(-3, 3)
-	var randPosY = rng.randi_range(-3, 3)
-
-	endPosition = startPosition - Vector2(randPosX*16, randPosY*16)
+	endPosition = startPosition - Vector2(3*16, 3*16)
 
 	
 func updateVelocity():

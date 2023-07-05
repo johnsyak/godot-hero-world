@@ -47,22 +47,8 @@ func _change_direction():
 	_end_pos = _start_pos
 
 func _update_animation():
-	var animationString = "walk_up"
-	var normalized_velocity = Vector2(abs(velocity.x), abs(velocity.y))
-	if velocity.y < 0:
-		if normalized_velocity.y > normalized_velocity.x:
-			animationString = "walk_up"
-	elif velocity.y > 0:
-		if normalized_velocity.y > normalized_velocity.x:
-			animationString = "walk_down"
-	if velocity.x < 0:
-		if(normalized_velocity.x > normalized_velocity.y):
-			animationString = "walk_left"
-	if velocity.x > 0:
-		if normalized_velocity.x > normalized_velocity.y:
-			animationString = "walk_right"
-	animations.play(animationString)
-	
+	animations.play(_get_direction())
+
 func _handle_collision():
 	for i in get_slide_collision_count():
 		var collision = get_slide_collision(i)
@@ -80,12 +66,30 @@ func _resetPos():
 
 func _get_rand_range_threshold():
 	return _rng.randi_range(-tile_move_dist, tile_move_dist)
+	
+func _get_direction():
+	var animation_string = "walk_right"
+	var normalized_velocity = Vector2(abs(velocity.x), abs(velocity.y))
+	if velocity.y < 0:
+		if normalized_velocity.y > normalized_velocity.x:
+			animation_string = "walk_up"
+	elif velocity.y > 0:
+		if normalized_velocity.y > normalized_velocity.x:
+			animation_string = "walk_down"
+	if velocity.x < 0:
+		if(normalized_velocity.x > normalized_velocity.y):
+			animation_string = "walk_left"
+	if velocity.x > 0:
+		if normalized_velocity.x > normalized_velocity.y:
+			animation_string = "walk_right"
+	return animation_string
 
 var _timer = 0
 
 func _process(delta):
 	if(!enemy_raycast.is_colliding()):
-		return
+		_timer = 0
+		return	
 	if _timer == 0:
 		_on_enemy_raycast_fire()
 	elif (_timer>fire_rate):
@@ -98,10 +102,18 @@ func _on_enemy_raycast_fire() -> void:
 	print("Lizurd fire!")
 	var projectile = projectilePath.instantiate() 
 	get_parent().add_child(projectile)
-#	projectile.position = $Marker2D.global_position
-#	projectile.velocity = Vector2(100,0)
-#	var inst = projectile.instantiate()
-#	owner.add_child(inst)
-#	inst.transform = get_node("Marker2D").global_transform
-
+	projectile.position = $Marker2D.global_position
+	var direction = _get_direction()
+	var fire_direction
+	match direction:
+		"walk_up":
+			fire_direction = Vector2(0, 1)
+		"walk_down":
+			fire_direction = Vector2(0, -1)
+		"walk_left":
+			fire_direction = Vector2(1, 0)
+		"walk_right":
+			fire_direction = Vector2(-1, 0)
+	projectile.velocity = fire_direction
+	
 
