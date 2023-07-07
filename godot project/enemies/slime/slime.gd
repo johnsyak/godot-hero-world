@@ -4,41 +4,14 @@ extends CharacterBody2D
 @export var limit = 0.5
 
 @onready var animations = $AnimatedSprite2D
+@onready var player = get_tree().get_nodes_in_group("player_group")[0]
 
-var lastDirection = "Down"
-var startPosition
-var endPosition
-var tetherPosition
-
-var rng = RandomNumberGenerator.new()
 
 func _ready():
-	startPosition = position
-	tetherPosition = position
-	endPosition = startPosition - Vector2(3*16, 3*16)
-
+	pass
 	
 func updateVelocity():
-	var moveDirection = endPosition - position
-	if moveDirection.length() < limit:
-		changeDirection()
-	velocity = moveDirection.normalized()*speed
-
-func changeDirection():
-	var tempEnd = endPosition
-	endPosition = startPosition
-	var maxPosition = tetherPosition + Vector2(6*16, 6*16)
-
-	if tempEnd > tetherPosition:
-		tempEnd = position - Vector2(tetherPosition.x, tetherPosition.y)
-
-	else:
-		var randPosX = rng.randi_range(-2, 2)
-		var randPosY = rng.randi_range(-2, 2)
-		tempEnd = endPosition - Vector2(randPosX*16, randPosY*16)
-	
-	
-	startPosition = tempEnd
+	velocity = (player.position - position).normalized() * speed
 
 func updateAnimation():
 	var animationString = "walkUp"

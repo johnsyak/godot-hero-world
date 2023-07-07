@@ -216,13 +216,13 @@ size = Vector2(14, 4)
 [node name="Player" type="CharacterBody2D"]
 z_index = 1
 y_sort_enabled = true
-position = Vector2(159, 81)
 collision_layer = 6
 script = SubResource("GDScript_usmdi")
 speed = 60
+metadata/_edit_horizontal_guides_ = [-87.0]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-159, -89)
+position = Vector2(0, -8)
 texture = ExtResource("1_vwhka")
 hframes = 4
 vframes = 7
@@ -233,12 +233,13 @@ libraries = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-159, -84)
+position = Vector2(0, -2)
 shape = SubResource("RectangleShape2D_hyq2f")
 
 [node name="Hurtbox" parent="." instance=ExtResource("2_wcoyr")]
+position = Vector2(0, -1)
 
 [node name="CollisionShape2D" parent="Hurtbox" index="0"]
-position = Vector2(-159, -88)
+position = Vector2(0, -6)
 
 [editable path="Hurtbox"]
