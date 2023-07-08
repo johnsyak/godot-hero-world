@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://0k3wi4i6ah8d"]
+
+[ext_resource type="Script" path="res://scenes/follow cam.gd" id="1_6vibi"]
+
+[node name="follow cam" type="Camera2D" node_paths=PackedStringArray("tilemap")]
+position = Vector2(-159, -85)
+script = ExtResource("1_6vibi")
+tilemap = NodePath("../..")

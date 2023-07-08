@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cbsptxb38q668"]
+[gd_scene load_steps=18 format=3 uid="uid://cbsptxb38q668"]
 
 [ext_resource type="Texture2D" uid="uid://c207wnffvir48" path="res://art/Player SpriteSheet.png" id="1_vwhka"]
 [ext_resource type="PackedScene" uid="uid://cdt3kvl0js1r2" path="res://overlap/hurtbox.tscn" id="2_wcoyr"]
@@ -6,11 +6,28 @@
 [sub_resource type="GDScript" id="GDScript_usmdi"]
 script/source = "extends CharacterBody2D
 
+signal health_changed
+
 @export var speed: int = 0 
 @export var run_speed: float = 1.5
 
 @onready var animations = $AnimationPlayer
 @onready var last_direction:String = \"Down\"
+@onready var effects = $Effects
+@onready var hurt_timer = $hurt_timer
+
+
+
+@export var max_health =3
+@onready var current_health: int = max_health
+
+@export var knockback_power: int = 1000
+
+var is_hurt: bool = false
+var enemy_collisions = []
+
+func _ready():
+	effects.play(\"RESET\")
 
 func _handle_input():
 	var move_direction = Input.get_vector(\"ui_left\", \"ui_right\", \"ui_up\", \"ui_down\")
@@ -18,6 +35,12 @@ func _handle_input():
 	if Input.is_action_pressed(\"run\"):
 		velocity = move_direction*speed*run_speed
 	#if(Input.is_action_pressed())
+	
+func handle_collision():
+	for i in get_slide_collision_count():
+		var collision = get_slide_collision(i)
+		var collider = collision.get_collider()
+		print_debug(collider.name)
 	
 func _updateAnimation():
 	var direction =\"Down\"
@@ -37,7 +60,47 @@ func _updateAnimation():
 func _physics_process(delta):
 	_handle_input()
 	move_and_slide()
+	handle_collision()
 	_updateAnimation()
+	if !is_hurt:
+		for enemy_area in enemy_collisions:
+			hurt_by_enemy(enemy_area)
+			
+func hurt_by_enemy(area):
+	current_health -= 1
+	if current_health < 0:
+		current_health = max_health
+		
+func _on_hurt_box_area_entered(area):
+	if area.name == \"hit_box\":
+		current_health -= 1
+		if current_health < 0:
+			current_health = max_health
+		enemy_collisions.append(area)
+		
+	health_changed.emit(current_health)
+	is_hurt = true
+	knockback(area.get_parent().velocity)
+	effects.play(\"hurt_blink\")
+	hurt_timer.start()
+	await hurt_timer.timeout
+	effects.play(\"RESET\")
+	is_hurt = false
+	
+
+		
+func knockback(enemy_velocity: Vector2):
+	var knockback_direction = (enemy_velocity - velocity).normalized() * knockback_power
+	velocity = knockback_direction
+	print_debug(velocity)
+	print_debug(position)
+	move_and_slide()
+	print_debug(\" \")
+	print_debug(position)
+	print_debug(\" \")
+	
+func _on_hurt_box_area_exited(area):
+	enemy_collisions.erase(area)
 
 
 "
@@ -213,19 +276,65 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hyq2f"]
 size = Vector2(14, 4)
 
+[sub_resource type="Animation" id="Animation_s05kr"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.988235, 0, 0.0705882, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_7x8ij"]
+resource_name = "hurt_blink"
+length = 0.4
+loop_mode = 1
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.988235, 0, 0.0705882, 0.470588), Color(0.988235, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_phf28"]
+_data = {
+"RESET": SubResource("Animation_s05kr"),
+"hurt_blink": SubResource("Animation_7x8ij")
+}
+
 [node name="Player" type="CharacterBody2D"]
 z_index = 1
 y_sort_enabled = true
-collision_layer = 6
 script = SubResource("GDScript_usmdi")
 speed = 60
 metadata/_edit_horizontal_guides_ = [-87.0]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+clip_children = 2
 position = Vector2(0, -8)
 texture = ExtResource("1_vwhka")
 hframes = 4
 vframes = 7
+
+[node name="ColorRect" type="ColorRect" parent="Sprite2D"]
+offset_left = -20.0
+offset_top = -17.0
+offset_right = 20.0
+offset_bottom = 23.0
+color = Color(0.988235, 0, 0.0705882, 0)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -233,15 +342,28 @@ libraries = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+light_mask = 3
+visibility_layer = 3
 position = Vector2(0, -2)
 shape = SubResource("RectangleShape2D_hyq2f")
 
-[node name="Hurtbox" parent="." instance=ExtResource("2_wcoyr")]
+[node name="hurt_box" parent="." instance=ExtResource("2_wcoyr")]
+visibility_layer = 3
 position = Vector2(0, -1)
 collision_layer = 15
 collision_mask = 15
 
-[node name="CollisionShape2D" parent="Hurtbox" index="0"]
+[node name="CollisionShape2D" parent="hurt_box" index="0"]
 position = Vector2(0, -6)
 
-[editable path="Hurtbox"]
+[node name="Effects" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_phf28")
+}
+
+[node name="hurt_timer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="area_entered" from="hurt_box" to="." method="_on_hurt_box_area_entered"]
+
+[editable path="hurt_box"]
