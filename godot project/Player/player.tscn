@@ -6,6 +6,8 @@
 [sub_resource type="GDScript" id="GDScript_usmdi"]
 script/source = "extends CharacterBody2D
 
+signal health_changed
+
 @export var speed: int = 0 
 @export var run_speed: float = 1.5
 
@@ -14,7 +16,7 @@ script/source = "extends CharacterBody2D
 @onready var effects = $Effects
 @onready var hurt_timer = $hurt_timer
 
-signal health_changed
+
 
 @export var max_health =3
 @onready var current_health: int = max_health
@@ -71,6 +73,9 @@ func hurt_by_enemy(area):
 		
 func _on_hurt_box_area_entered(area):
 	if area.name == \"hit_box\":
+		current_health -= 1
+		if current_health < 0:
+			current_health = max_health
 		enemy_collisions.append(area)
 		
 	health_changed.emit(current_health)
@@ -313,7 +318,6 @@ _data = {
 [node name="Player" type="CharacterBody2D"]
 z_index = 1
 y_sort_enabled = true
-collision_layer = 6
 script = SubResource("GDScript_usmdi")
 speed = 60
 metadata/_edit_horizontal_guides_ = [-87.0]
@@ -338,15 +342,16 @@ libraries = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+light_mask = 3
+visibility_layer = 3
 position = Vector2(0, -2)
 shape = SubResource("RectangleShape2D_hyq2f")
 
-[node name="Hurtbox" parent="." instance=ExtResource("2_wcoyr")]
-light_mask = 15
-visibility_layer = 15
+[node name="hurt_box" parent="." instance=ExtResource("2_wcoyr")]
+visibility_layer = 3
 position = Vector2(0, -1)
 
-[node name="CollisionShape2D" parent="Hurtbox" index="0"]
+[node name="CollisionShape2D" parent="hurt_box" index="0"]
 position = Vector2(0, -6)
 
 [node name="Effects" type="AnimationPlayer" parent="."]
@@ -357,4 +362,6 @@ libraries = {
 [node name="hurt_timer" type="Timer" parent="."]
 one_shot = true
 
-[editable path="Hurtbox"]
+[connection signal="area_entered" from="hurt_box" to="." method="_on_hurt_box_area_entered"]
+
+[editable path="hurt_box"]
