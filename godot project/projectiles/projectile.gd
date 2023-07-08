@@ -1,7 +1,7 @@
 extends Area2D
 
 @export var speed = 5
-@export var velocity = Vector2()
+@export var velocity: Vector2
 var screen_size
 var start_position = position
 # Called when the node enters the scene tree for the first time.

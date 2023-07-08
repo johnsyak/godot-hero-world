@@ -19,7 +19,7 @@ signal health_changed
 @export var MAX_HEALTH =3
 @onready var current_health: int = MAX_HEALTH
 
-@export var knockback_power: int = 1000
+@export var knockback_power: int = 1500
 
 var is_hurt: bool = false
 var enemy_collisions = []
@@ -78,21 +78,17 @@ func _on_hurt_box_area_entered(area):
 		await hurt_timer.timeout
 		effects.play(\"RESET\")
 		is_hurt = false
+	else:
+		is_hurt = false
 			
 func knockback(enemy_velocity: Vector2):
 	var knockback_direction = (enemy_velocity - velocity).normalized() * knockback_power
 	velocity = knockback_direction
-	print_debug(velocity)
-	print_debug(position)
 	move_and_slide()
-	print_debug(\" \")
-	print_debug(position)
-	print_debug(\" \")
 	
 func _on_hurt_box_area_exited(area):
 	enemy_collisions.erase(area)
 
-var invuln_duration = 0
 "
 
 [sub_resource type="Animation" id="Animation_3yogc"]
