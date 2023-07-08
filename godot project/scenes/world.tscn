@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dy4uju250tabf"]
+[gd_scene load_steps=14 format=3 uid="uid://dy4uju250tabf"]
 
 [ext_resource type="Script" path="res://scenes/world.gd" id="1_0fric"]
 [ext_resource type="Texture2D" uid="uid://c21xuldsw85k3" path="res://art/TilesetFloor.png" id="1_atja7"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://4b0tqchhjyt3" path="res://art/animatedFlower.png" id="3_cfjkr"]
 [ext_resource type="Script" path="res://scenes/follow cam.gd" id="5_cv8fh"]
 [ext_resource type="PackedScene" uid="uid://cyq4hr81ki25m" path="res://enemies/slime/slime.tscn" id="7_23wgd"]
+[ext_resource type="PackedScene" uid="uid://u6nx76c4dwew" path="res://enemies/lizard/lizard.tscn" id="7_qofcw"]
 [ext_resource type="PackedScene" uid="uid://c3uf31p64ahmn" path="res://scenes/hearts_container.tscn" id="9_h33a0"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_eplj6"]
@@ -2249,6 +2250,9 @@ endPoint = NodePath("Marker2D")
 [node name="Marker2D" type="Marker2D" parent="TileMap/slime"]
 z_index = 1
 position = Vector2(2, -34)
+
+[node name="Lizard" parent="TileMap" instance=ExtResource("7_qofcw")]
+position = Vector2(152, 43)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

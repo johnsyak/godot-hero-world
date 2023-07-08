@@ -16,10 +16,8 @@ signal health_changed
 @onready var effects = $Effects
 @onready var hurt_timer = $hurt_timer
 
-
-
-@export var max_health =3
-@onready var current_health: int = max_health
+@export var MAX_HEALTH =3
+@onready var current_health: int = MAX_HEALTH
 
 @export var knockback_power: int = 1000
 
@@ -62,33 +60,25 @@ func _physics_process(delta):
 	move_and_slide()
 	handle_collision()
 	_updateAnimation()
-	if !is_hurt:
-		for enemy_area in enemy_collisions:
-			hurt_by_enemy(enemy_area)
 			
 func hurt_by_enemy(area):
 	current_health -= 1
 	if current_health < 0:
-		current_health = max_health
+		current_health = MAX_HEALTH
 		
 func _on_hurt_box_area_entered(area):
-	if area.name == \"hit_box\":
-		current_health -= 1
-		if current_health < 0:
-			current_health = max_health
+	if area.name == \"hit_box\" and !is_hurt:
+		hurt_by_enemy(area)
 		enemy_collisions.append(area)
-		
-	health_changed.emit(current_health)
-	is_hurt = true
-	knockback(area.get_parent().velocity)
-	effects.play(\"hurt_blink\")
-	hurt_timer.start()
-	await hurt_timer.timeout
-	effects.play(\"RESET\")
-	is_hurt = false
-	
-
-		
+		health_changed.emit(current_health)
+		is_hurt = true
+		knockback(area.velocity)
+		effects.play(\"hurt_blink\")
+		hurt_timer.start()
+		await hurt_timer.timeout
+		effects.play(\"RESET\")
+		is_hurt = false
+			
 func knockback(enemy_velocity: Vector2):
 	var knockback_direction = (enemy_velocity - velocity).normalized() * knockback_power
 	velocity = knockback_direction
@@ -102,7 +92,7 @@ func knockback(enemy_velocity: Vector2):
 func _on_hurt_box_area_exited(area):
 	enemy_collisions.erase(area)
 
-
+var invuln_duration = 0
 "
 
 [sub_resource type="Animation" id="Animation_3yogc"]
