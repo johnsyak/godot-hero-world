@@ -1,5 +1,6 @@
-[gd_scene load_steps=12 format=3 uid="uid://dy4uju250tabf"]
+[gd_scene load_steps=14 format=3 uid="uid://dy4uju250tabf"]
 
+[ext_resource type="Script" path="res://scenes/world.gd" id="1_0fric"]
 [ext_resource type="Texture2D" uid="uid://c21xuldsw85k3" path="res://art/TilesetFloor.png" id="1_atja7"]
 [ext_resource type="PackedScene" uid="uid://cbsptxb38q668" path="res://Player/player.tscn" id="1_uaqgb"]
 [ext_resource type="Texture2D" uid="uid://dfaestbwx1x0x" path="res://art/TilesetNature.png" id="2_dnigq"]
@@ -7,6 +8,7 @@
 [ext_resource type="Script" path="res://scenes/follow cam.gd" id="5_cv8fh"]
 [ext_resource type="PackedScene" uid="uid://cyq4hr81ki25m" path="res://enemies/slime/slime.tscn" id="7_23wgd"]
 [ext_resource type="PackedScene" uid="uid://u6nx76c4dwew" path="res://enemies/lizard/lizard.tscn" id="7_qofcw"]
+[ext_resource type="PackedScene" uid="uid://c3uf31p64ahmn" path="res://scenes/hearts_container.tscn" id="9_h33a0"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_eplj6"]
 texture = ExtResource("1_atja7")
@@ -2207,6 +2209,7 @@ sources/1 = SubResource("TileSetAtlasSource_87q5n")
 sources/3 = SubResource("TileSetAtlasSource_e7olo")
 
 [node name="World" type="Node2D"]
+script = ExtResource("1_0fric")
 
 [node name="TileMap" type="TileMap" parent="."]
 z_index = 1
@@ -2247,8 +2250,18 @@ y_sort_enabled = true
 position = Vector2(126, 59)
 
 [node name="slime" parent="TileMap" instance=ExtResource("7_23wgd")]
-position = Vector2(201, 152)
+position = Vector2(180, 128)
 
 [node name="Lizard3" parent="TileMap" instance=ExtResource("7_qofcw")]
 z_index = 1
 position = Vector2(128, 171)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="hearts_container" parent="CanvasLayer" instance=ExtResource("9_h33a0")]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_right = 0.0
+grow_horizontal = 0
