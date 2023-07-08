@@ -2250,7 +2250,11 @@ y_sort_enabled = true
 position = Vector2(126, 59)
 
 [node name="slime" parent="TileMap" instance=ExtResource("7_23wgd")]
-position = Vector2(180, 128)
+position = Vector2(178, 128)
+
+[node name="Marker2D" type="Marker2D" parent="TileMap/slime"]
+z_index = 1
+position = Vector2(2, -34)
 
 [node name="Lizard3" parent="TileMap" instance=ExtResource("7_qofcw")]
 z_index = 1
