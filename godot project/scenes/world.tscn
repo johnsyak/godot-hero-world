@@ -2245,6 +2245,7 @@ tilemap = NodePath("../..")
 
 [node name="slime" parent="TileMap" node_paths=PackedStringArray("endPoint") instance=ExtResource("7_23wgd")]
 position = Vector2(178, 128)
+speed = 20
 endPoint = NodePath("Marker2D")
 
 [node name="Marker2D" type="Marker2D" parent="TileMap/slime"]
@@ -2253,6 +2254,7 @@ position = Vector2(2, -34)
 
 [node name="Lizard" parent="TileMap" instance=ExtResource("7_qofcw")]
 position = Vector2(152, 43)
+speed = 30
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
