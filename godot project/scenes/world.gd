@@ -1,12 +1,12 @@
 extends Node2D
 
 @onready var hearts_container = $CanvasLayer/hearts_container
-@onready var player  = $TileMap/player
+@onready var player  = get_tree().get_nodes_in_group("player_group")[0]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	hearts_container.setMaxHearts(player.max_health)
-	hearts_container.updateHearts(player.current_health)
+	hearts_container.set_max_hearts(player.max_health)
+	hearts_container.update_hearts(player.current_health)
 	player.health_changed.connect(hearts_container.update_hearts)
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
