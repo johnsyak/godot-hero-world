@@ -32,13 +32,11 @@ func _handle_input():
 	velocity = move_direction*speed
 	if Input.is_action_pressed(\"run\"):
 		velocity = move_direction*speed*run_speed
-	#if(Input.is_action_pressed())
 	
 func handle_collision():
 	for i in get_slide_collision_count():
 		var collision = get_slide_collision(i)
 		var collider = collision.get_collider()
-		print_debug(collider.name)
 	
 func _updateAnimation():
 	var direction =\"Down\"

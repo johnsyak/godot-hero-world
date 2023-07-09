@@ -231,6 +231,7 @@ height = 14.0
 [node name="slime" type="CharacterBody2D"]
 collision_layer = 2
 collision_mask = 2
+floor_constant_speed = true
 script = ExtResource("1_gu56h")
 speed = 0
 

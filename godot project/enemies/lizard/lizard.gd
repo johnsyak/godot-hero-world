@@ -9,6 +9,7 @@ extends CharacterBody2D
 @onready var animations = $AnimatedSprite2D
 @onready var enemy_raycast = $EnemyRaycast
 const projectilePath = preload("res://projectiles/projectile.tscn")
+const MovementUtil = preload("res://overlap/MovementUtil.gd")
 
 var tether_pos
 var start_pos
@@ -68,21 +69,7 @@ func _get_rand_range_threshold():
 	return rng.randi_range(-tile_move_dist, tile_move_dist)
 	
 func _get_direction():
-	var animation_string = "walk_right"
-	var normalized_velocity = Vector2(abs(velocity.x), abs(velocity.y))
-	if velocity.y < 0:
-		if normalized_velocity.y > normalized_velocity.x:
-			animation_string = "walk_up"
-	elif velocity.y > 0:
-		if normalized_velocity.y > normalized_velocity.x:
-			animation_string = "walk_down"
-	if velocity.x < 0:
-		if(normalized_velocity.x > normalized_velocity.y):
-			animation_string = "walk_left"
-	if velocity.x > 0:
-		if normalized_velocity.x > normalized_velocity.y:
-			animation_string = "walk_right"
-	return animation_string
+	return MovementUtil.get_direction(velocity.x, velocity.y)
 
 var timer = 0
 
@@ -102,9 +89,8 @@ func _on_enemy_raycast_fire() -> void:
 	get_parent().add_child(projectile)
 	var start_position = $Marker2D.global_position
 	projectile.position = start_position
-	var direction = _get_direction()
 	var fire_direction
-	match direction:
+	match _get_direction():
 		"walk_up":
 			fire_direction = Vector2(0, 1)
 		"walk_down":

@@ -2250,7 +2250,7 @@ endPoint = NodePath("Marker2D")
 
 [node name="Marker2D" type="Marker2D" parent="TileMap/slime"]
 z_index = 1
-position = Vector2(2, -34)
+position = Vector2(-19, 47)
 
 [node name="Lizard" parent="TileMap" instance=ExtResource("7_qofcw")]
 position = Vector2(152, 43)
