@@ -17,6 +17,3 @@ offset = Vector2(1, 1)
 hframes = 4
 
 [node name="hit_box" parent="." instance=ExtResource("3_kofx8")]
-
-[connection signal="area_entered" from="." to="." method="_on_area_entered"]
-[connection signal="area_shape_entered" from="." to="." method="_on_area_shape_entered"]
