@@ -1,6 +1,6 @@
 extends RayCast2D
 
-@export var _raycast_range = 100
+@export var raycast_range = 100
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass
@@ -18,15 +18,15 @@ func _adjust_direction():
 	var parent_vector = Vector2(abs(parent.velocity.x), abs(parent.velocity.y))
 	if parent.velocity.x < 0:
 		if parent_vector.x > parent_vector.y:
-			target_position = Vector2(-_raycast_range, 0)
+			target_position = Vector2(-raycast_range, 0)
 	if parent.velocity.x > 0:
 		if parent_vector.x > parent_vector.y:
-			target_position = Vector2(_raycast_range, 0)
+			target_position = Vector2(raycast_range, 0)
 	if parent.velocity.y < 0:
 		if parent_vector.y > parent_vector.x:
-			target_position = Vector2(0, -_raycast_range)
+			target_position = Vector2(0, -raycast_range)
 	if(parent.velocity.y > 0):
 		if parent_vector.y > parent_vector.x:
-			target_position = Vector2(0, _raycast_range)
+			target_position = Vector2(0, raycast_range)
 
 
