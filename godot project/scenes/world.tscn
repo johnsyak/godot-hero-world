@@ -6,8 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://dfaestbwx1x0x" path="res://art/TilesetNature.png" id="2_dnigq"]
 [ext_resource type="Texture2D" uid="uid://4b0tqchhjyt3" path="res://art/animatedFlower.png" id="3_cfjkr"]
 [ext_resource type="Script" path="res://scenes/follow cam.gd" id="5_cv8fh"]
-[ext_resource type="PackedScene" uid="uid://cyq4hr81ki25m" path="res://enemies/slime/slime.tscn" id="7_23wgd"]
 [ext_resource type="PackedScene" uid="uid://u6nx76c4dwew" path="res://enemies/lizard/lizard.tscn" id="7_qofcw"]
+[ext_resource type="PackedScene" uid="uid://cyq4hr81ki25m" path="res://enemies/slime/slime.tscn" id="8_yrrwn"]
 [ext_resource type="PackedScene" uid="uid://c3uf31p64ahmn" path="res://scenes/hearts_container.tscn" id="9_h33a0"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_eplj6"]
@@ -2243,30 +2243,20 @@ position = Vector2(0, -3)
 script = ExtResource("5_cv8fh")
 tilemap = NodePath("../..")
 
-[node name="slime" parent="TileMap" node_paths=PackedStringArray("endPoint") instance=ExtResource("7_23wgd")]
-light_mask = 0
-visibility_layer = 0
-position = Vector2(178, 128)
-speed = 20
+[node name="Lizard" parent="TileMap" instance=ExtResource("7_qofcw")]
+position = Vector2(319, 57)
+speed = 30
+limit = 2.0
+tether_max = 2
+tile_move_dist = 3
+
+[node name="slime" parent="TileMap" node_paths=PackedStringArray("endPoint") instance=ExtResource("8_yrrwn")]
+position = Vector2(196, 125)
+speed = 30
 endPoint = NodePath("Marker2D")
 
 [node name="Marker2D" type="Marker2D" parent="TileMap/slime"]
-z_index = 1
-position = Vector2(-19, 47)
-
-[node name="Lizard" parent="TileMap" instance=ExtResource("7_qofcw")]
-light_mask = 0
-z_index = 1
-position = Vector2(152, 43)
-speed = 30
-
-[node name="Lizard2" parent="TileMap" instance=ExtResource("7_qofcw")]
-position = Vector2(386, 83)
-speed = 30
-
-[node name="Lizard3" parent="TileMap" instance=ExtResource("7_qofcw")]
-position = Vector2(382, 139)
-speed = 30
+position = Vector2(53, 35)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

@@ -6,7 +6,7 @@ extends CharacterBody2D
 
 @onready var animations = $AnimationPlayer
 
-const MovementUtil = preload("res://overlap/MovementUtil.gd")
+const DirectionUtil = preload("res://overlap/DirectionUtil.gd")
 
 var startPosition
 var endPosition
@@ -31,7 +31,7 @@ func updateAnimation():
 		if animations.is_playing():
 			animations.stop()
 	else:
-		animations.play(MovementUtil.get_direction(velocity.x, velocity.y))
+		animations.play(DirectionUtil.get_walk_direction(velocity.x, velocity.y))
 		
 func _physics_process(delta):
 	updateVelocity()

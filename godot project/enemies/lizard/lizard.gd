@@ -8,8 +8,8 @@ extends CharacterBody2D
 
 @onready var animations = $AnimatedSprite2D
 @onready var enemy_raycast = $EnemyRaycast
-const projectilePath = preload("res://projectiles/projectile.tscn")
-const MovementUtil = preload("res://overlap/MovementUtil.gd")
+const projectile_path = preload("res://projectiles/projectile.tscn")
+const DirectionUtil = preload("res://overlap/DirectionUtil.gd")
 
 var tether_pos
 var start_pos
@@ -69,7 +69,7 @@ func _get_rand_range_threshold():
 	return rng.randi_range(-tile_move_dist, tile_move_dist)
 	
 func _get_direction():
-	return MovementUtil.get_direction(velocity.x, velocity.y)
+	return DirectionUtil.get_walk_direction(velocity.x, velocity.y)
 
 var timer = 0
 
@@ -85,23 +85,12 @@ func _process(delta):
 	timer+=delta
 
 func _on_enemy_raycast_fire() -> void:
-	var projectile = projectilePath.instantiate() 
+	var projectile = projectile_path.instantiate() 
 	get_parent().add_child(projectile)
 	var start_position = $Marker2D.global_position
 	projectile.position = start_position
-	var fire_direction
-	match _get_direction():
-		"walk_up":
-			fire_direction = Vector2(0, 1)
-		"walk_down":
-			fire_direction = Vector2(0, -1)
-		"walk_left":
-			fire_direction = Vector2(1, 0)
-		"walk_right":
-			fire_direction = Vector2(-1, 0)
-	projectile.velocity = fire_direction
-	if(projectile.position.x > start_position.x + 10 or projectile.position.y > start_position.y + 10 ):
-		projectile.queue_free()
+	projectile.velocity = DirectionUtil.get_fire_direction(velocity.x, velocity.y)
+
 
 	
 

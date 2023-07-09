@@ -8,6 +8,7 @@ script/source = "extends CharacterBody2D
 
 signal health_changed
 
+
 @export var speed: int = 0 
 @export var run_speed: float = 1.5
 
@@ -39,18 +40,18 @@ func handle_collision():
 		var collider = collision.get_collider()
 	
 func _updateAnimation():
-	var direction =\"Down\"
+	var direction =\"down\"
 
-	if velocity.x < 0: direction =\"Left\"
-	elif velocity.x > 0: direction =\"Right\"
-	elif velocity.y < 0: direction =\"Up\"
+	if velocity.x < 0: direction =\"left\"
+	elif velocity.x > 0: direction =\"right\"
+	elif velocity.y < 0: direction =\"up\"
 
 	if velocity.length() == 0:
 		animations.play(\"idle\" + last_direction)
 		if animations.is_playing():
 			animations.stop()
 	else:
-		animations.play(\"walk\" + direction)
+		animations.play(\"walk_\" + direction)
 		last_direction = direction
 	
 func _physics_process(delta):
@@ -174,7 +175,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_rxi6e"]
-resource_name = "walkDown"
+resource_name = "walk_down"
 length = 0.8
 loop_mode = 1
 step = 0.2
@@ -192,7 +193,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_glps0"]
-resource_name = "walkLeft"
+resource_name = "walk_left"
 length = 0.8
 loop_mode = 1
 step = 0.2
@@ -210,7 +211,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_ecuck"]
-resource_name = "walkRight"
+resource_name = "walk_right"
 length = 0.8
 loop_mode = 1
 step = 0.2
@@ -228,7 +229,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_wddnt"]
-resource_name = "walkUp"
+resource_name = "walk_up"
 length = 0.8
 loop_mode = 1
 step = 0.2
@@ -252,10 +253,10 @@ _data = {
 "idleLeft": SubResource("Animation_4130l"),
 "idleRight": SubResource("Animation_2yfn2"),
 "idleUp": SubResource("Animation_4x0db"),
-"walkDown": SubResource("Animation_rxi6e"),
-"walkLeft": SubResource("Animation_glps0"),
-"walkRight": SubResource("Animation_ecuck"),
-"walkUp": SubResource("Animation_wddnt")
+"walk_down": SubResource("Animation_rxi6e"),
+"walk_left": SubResource("Animation_glps0"),
+"walk_right": SubResource("Animation_ecuck"),
+"walk_up": SubResource("Animation_wddnt")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hyq2f"]
