@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://bl7o65oj0gko5"]
+
+[ext_resource type="Script" path="res://enemies/slime/hit_box.gd" id="1_yopro"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2lh5j"]
+radius = 4.0
+height = 14.0
+
+[node name="hit_box" type="Area2D"]
+light_mask = 3
+visibility_layer = 3
+position = Vector2(28, 27)
+script = ExtResource("1_yopro")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-28, -26)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_2lh5j")
+debug_color = Color(0.635294, 0.360784, 0.968627, 0.419608)
