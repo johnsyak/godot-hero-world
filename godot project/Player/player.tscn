@@ -15,6 +15,7 @@ signal health_changed
 @onready var animations = $AnimationPlayer
 @onready var last_direction:String = \"Down\"
 @onready var effects = $Effects
+@onready var hurt_box = $hurt_box
 @onready var hurt_timer = $hurt_timer
 
 @export var MAX_HEALTH =3
@@ -23,7 +24,6 @@ signal health_changed
 @export var knockback_power: int = 1500
 
 var is_hurt: bool = false
-var enemy_collisions = []
 
 func _ready():
 	effects.play(\"RESET\")
@@ -59,26 +59,30 @@ func _physics_process(delta):
 	move_and_slide()
 #	handle_collision()
 	_updateAnimation()
+	if !is_hurt:
+		for area in hurt_box.get_overlapping_areas():
+			if area.name == \"hit_box\":
+				hurt_by_enemy(area)
 			
 func hurt_by_enemy(area):
 	current_health -= 1
 	if current_health < 0:
 		current_health = MAX_HEALTH
+	
+	health_changed.emit(current_health)
+	is_hurt = true
+	knockback(area.velocity)
+	effects.play(\"hurt_blink\")
+	hurt_timer.start()
+	await hurt_timer.timeout
+	effects.play(\"RESET\")
+	is_hurt = false
 		
 func _on_hurt_box_area_entered(area):
-	if area.name == \"hit_box\" and !is_hurt:
-		hurt_by_enemy(area)
-		enemy_collisions.append(area)
-		health_changed.emit(current_health)
-		is_hurt = true
-		knockback(area.velocity)
-		effects.play(\"hurt_blink\")
-		hurt_timer.start()
-		await hurt_timer.timeout
-		effects.play(\"RESET\")
-		is_hurt = false
-	else:
-		is_hurt = false
+	if area.has_method(\"collect\"):
+		area.collect()
+		
+
 			
 func knockback(enemy_velocity: Vector2):
 	#todo bug fix knockback based on vector(1,0), (0,1), (-1,0), (0,-1)
