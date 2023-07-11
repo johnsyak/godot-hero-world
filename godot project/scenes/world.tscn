@@ -2260,7 +2260,6 @@ tilemap = NodePath("../..")
 
 [node name="Lizard" parent="TileMap" instance=ExtResource("7_qofcw")]
 position = Vector2(319, 57)
-speed = 30
 limit = 2.0
 tether_max = 2
 tile_move_dist = 3

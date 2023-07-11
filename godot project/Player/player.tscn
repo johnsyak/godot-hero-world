@@ -85,8 +85,10 @@ func _on_hurt_box_area_entered(area):
 
 			
 func knockback(enemy_velocity: Vector2):
+	var v
 	#todo bug fix knockback based on vector(1,0), (0,1), (-1,0), (0,-1)
 	velocity = (enemy_velocity - velocity).normalized() * knockback_power
+	v = velocity
 	move_and_slide()
 	
 #func _on_hurt_box_area_exited(area):
