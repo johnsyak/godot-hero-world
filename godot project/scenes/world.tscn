@@ -2259,8 +2259,7 @@ script = ExtResource("5_cv8fh")
 tilemap = NodePath("../..")
 
 [node name="Lizard" parent="TileMap" instance=ExtResource("7_qofcw")]
-position = Vector2(254, 54)
-speed = 30
+position = Vector2(319, 57)
 limit = 2.0
 
 [node name="slime" parent="TileMap" node_paths=PackedStringArray("endPoint") instance=ExtResource("8_yrrwn")]
