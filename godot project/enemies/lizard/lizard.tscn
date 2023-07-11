@@ -145,9 +145,6 @@ size = Vector2(16, 4)
 [node name="Lizard" type="CharacterBody2D"]
 script = ExtResource("1_4ynd1")
 speed = 0
-limit = null
-tether_max = null
-tile_move_dist = null
 fire_rate = 0.6
 metadata/velocity = 0
 

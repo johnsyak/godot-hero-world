@@ -5,9 +5,9 @@
 [ext_resource type="PackedScene" uid="uid://cbsptxb38q668" path="res://Player/player.tscn" id="1_uaqgb"]
 [ext_resource type="Texture2D" uid="uid://dfaestbwx1x0x" path="res://art/TilesetNature.png" id="2_dnigq"]
 [ext_resource type="Texture2D" uid="uid://4b0tqchhjyt3" path="res://art/animatedFlower.png" id="3_cfjkr"]
-[ext_resource type="PackedScene" uid="uid://c0hsvnq4y1uq8" path="res://scenes/lifepot.tscn" id="4_a5l0i"]
+[ext_resource type="PackedScene" path="res://scenes/lifepot.tscn" id="4_a5l0i"]
 [ext_resource type="Script" path="res://scenes/follow cam.gd" id="5_cv8fh"]
-[ext_resource type="PackedScene" uid="uid://ddf7t6rsxlou1" path="res://scenes/sword.tscn" id="5_jtl0y"]
+[ext_resource type="PackedScene" path="res://scenes/sword.tscn" id="5_jtl0y"]
 [ext_resource type="PackedScene" uid="uid://u6nx76c4dwew" path="res://enemies/lizard/lizard.tscn" id="7_qofcw"]
 [ext_resource type="PackedScene" uid="uid://cyq4hr81ki25m" path="res://enemies/slime/slime.tscn" id="8_yrrwn"]
 [ext_resource type="PackedScene" uid="uid://c3uf31p64ahmn" path="res://scenes/hearts_container.tscn" id="9_h33a0"]
@@ -2259,11 +2259,9 @@ script = ExtResource("5_cv8fh")
 tilemap = NodePath("../..")
 
 [node name="Lizard" parent="TileMap" instance=ExtResource("7_qofcw")]
-position = Vector2(319, 57)
+position = Vector2(254, 54)
 speed = 30
 limit = 2.0
-tether_max = 2
-tile_move_dist = 3
 
 [node name="slime" parent="TileMap" node_paths=PackedStringArray("endPoint") instance=ExtResource("8_yrrwn")]
 position = Vector2(196, 125)
