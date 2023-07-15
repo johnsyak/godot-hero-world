@@ -87,8 +87,7 @@ func _process(delta):
 func _on_enemy_raycast_fire() -> void:
 	var projectile = projectile_path.instantiate() 
 	get_parent().add_child(projectile)
-	var start_position = $Marker2D.global_position
-	projectile.position = start_position
+	projectile.position = $Marker2D.global_position
 	projectile.velocity = DirectionUtil.get_fire_direction(velocity.x, velocity.y)
 
 
