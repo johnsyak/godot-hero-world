@@ -86,7 +86,11 @@ func _on_hurt_box_area_entered(area):
 			
 func knockback(enemy_velocity: Vector2):
 	velocity = (enemy_velocity - velocity).normalized() * knockback_power
-	if velocity.y < 0:
+	if velocity.y > 0:
+		velocity.y = abs(velocity.y)
+	elif velocity.x > 0:
+		velocity.x = abs(velocity.x)
+	elif velocity.y < 0:
 		velocity.y = abs(velocity.y)
 	elif velocity.x < 0:
 		velocity.x = abs(velocity.x)
