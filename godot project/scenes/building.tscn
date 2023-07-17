@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://d0587a5vedu3a"]
+[gd_scene load_steps=11 format=3 uid="uid://d0587a5vedu3a"]
 
 [ext_resource type="Texture2D" uid="uid://08ngi411op18" path="res://art/TilesetInterior.png" id="1_a7fww"]
 [ext_resource type="Texture2D" uid="uid://b1n78m6a20alq" path="res://art/TilesetInteriorFloor.png" id="2_6otn8"]
 [ext_resource type="Texture2D" uid="uid://b037k3y7o348k" path="res://art/TilesetHouse.png" id="3_alcxi"]
 [ext_resource type="Script" path="res://scenes/Interiordoorway.gd" id="4_o0rsw"]
+[ext_resource type="PackedScene" uid="uid://cbsptxb38q668" path="res://Player/player.tscn" id="5_wnmnl"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dnj40"]
 texture = ExtResource("1_a7fww")
@@ -1216,7 +1217,7 @@ size = Vector2(16, 16)
 [node name="building" type="Node2D"]
 
 [node name="TileMap" type="TileMap" parent="."]
-position = Vector2(59, 72)
+position = Vector2(-1, -2)
 tile_set = SubResource("TileSet_5in5o")
 format = 2
 layer_0/name = "Ground"
@@ -1228,6 +1229,10 @@ layer_1/y_sort_enabled = false
 layer_1/y_sort_origin = 0
 layer_1/z_index = 0
 layer_1/tile_data = PackedInt32Array(458756, 589829, 3)
+
+[node name="Player" parent="TileMap" groups=["player_group"] instance=ExtResource("5_wnmnl")]
+position = Vector2(72, 111)
+run_speed = 3.0
 
 [node name="Interiordoorway" type="Area2D" parent="TileMap"]
 position = Vector2(73, 125)
