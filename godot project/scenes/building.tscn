@@ -1,9 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://d0587a5vedu3a"]
+[gd_scene load_steps=10 format=3 uid="uid://d0587a5vedu3a"]
 
 [ext_resource type="Texture2D" uid="uid://08ngi411op18" path="res://art/TilesetInterior.png" id="1_a7fww"]
 [ext_resource type="Texture2D" uid="uid://b1n78m6a20alq" path="res://art/TilesetInteriorFloor.png" id="2_6otn8"]
 [ext_resource type="Texture2D" uid="uid://b037k3y7o348k" path="res://art/TilesetHouse.png" id="3_alcxi"]
-[ext_resource type="PackedScene" uid="uid://cbsptxb38q668" path="res://Player/player.tscn" id="4_nvym0"]
 [ext_resource type="Script" path="res://scenes/Interiordoorway.gd" id="4_o0rsw"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dnj40"]
@@ -1217,7 +1216,7 @@ size = Vector2(16, 16)
 [node name="building" type="Node2D"]
 
 [node name="TileMap" type="TileMap" parent="."]
-position = Vector2(-72, -67)
+position = Vector2(59, 72)
 tile_set = SubResource("TileSet_5in5o")
 format = 2
 layer_0/name = "Ground"
@@ -1237,9 +1236,6 @@ script = ExtResource("4_o0rsw")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TileMap/Interiordoorway"]
 position = Vector2(-1, -5)
 shape = SubResource("RectangleShape2D_rnmr1")
-
-[node name="Player" parent="." instance=ExtResource("4_nvym0")]
-position = Vector2(0, 43)
 
 [connection signal="body_entered" from="TileMap/Interiordoorway" to="TileMap/Interiordoorway" method="_on_body_entered"]
 [connection signal="body_exited" from="TileMap/Interiordoorway" to="TileMap/Interiordoorway" method="_on_body_exited"]
