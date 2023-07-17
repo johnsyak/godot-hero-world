@@ -1,8 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://cyq4hr81ki25m"]
+[gd_scene load_steps=15 format=3 uid="uid://cyq4hr81ki25m"]
 
 [ext_resource type="Script" path="res://enemies/slime/slime.gd" id="1_gu56h"]
 [ext_resource type="Texture2D" uid="uid://68ww6m0mgatg" path="res://enemies/slime/Slime.png" id="1_yhnk6"]
 [ext_resource type="Script" path="res://enemies/slime/hit_box.gd" id="3_608pn"]
+[ext_resource type="PackedScene" uid="uid://cj3xuxxknlxt8" path="res://scenes/health_component.tscn" id="4_jfk7r"]
+[ext_resource type="PackedScene" uid="uid://desk0jgj56duh" path="res://scenes/hitbox_component.tscn" id="5_e56hj"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_eej1p"]
 radius = 3.0
@@ -228,6 +230,10 @@ _data = {
 radius = 4.0
 height = 14.0
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_omdad"]
+radius = 4.0
+height = 14.0
+
 [node name="slime" type="CharacterBody2D"]
 collision_layer = 2
 collision_mask = 2
@@ -262,3 +268,13 @@ position = Vector2(-28, -26)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_2lh5j")
 debug_color = Color(0.635294, 0.360784, 0.968627, 0.419608)
+
+[node name="health_component" parent="." instance=ExtResource("4_jfk7r")]
+
+[node name="hitbox_component" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("5_e56hj")]
+health_component = NodePath("../health_component")
+
+[node name="Area2D" type="CollisionShape2D" parent="hitbox_component"]
+position = Vector2(0, 1)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_omdad")

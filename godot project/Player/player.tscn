@@ -1,5 +1,6 @@
-[gd_scene load_steps=18 format=3 uid="uid://cbsptxb38q668"]
+[gd_scene load_steps=20 format=3 uid="uid://cbsptxb38q668"]
 
+[ext_resource type="PackedScene" uid="uid://djunwsbfoh45l" path="res://scenes/weapon.tscn" id="1_1w484"]
 [ext_resource type="Texture2D" uid="uid://c207wnffvir48" path="res://art/Player SpriteSheet.png" id="1_vwhka"]
 [ext_resource type="PackedScene" uid="uid://cdt3kvl0js1r2" path="res://overlap/hurtbox.tscn" id="2_wcoyr"]
 
@@ -33,6 +34,8 @@ func _handle_input():
 	velocity = move_direction*speed
 	if Input.is_action_pressed(\"run\"):
 		velocity = move_direction*speed*run_speed
+	#if Input.is_action_just_pressed(\"sword_attack\"):
+		#animations.play(move_direction+\"_attack\")
 	
 #func handle_collision():
 #	for i in get_slide_collision_count():
@@ -184,6 +187,9 @@ tracks/0/keys = {
 "values": [Vector2i(1, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_tkufx"]
+resource_name = "sword_attack"
+
 [sub_resource type="Animation" id="Animation_rxi6e"]
 resource_name = "walk_down"
 length = 0.8
@@ -263,6 +269,7 @@ _data = {
 "idleLeft": SubResource("Animation_4130l"),
 "idleRight": SubResource("Animation_2yfn2"),
 "idleUp": SubResource("Animation_4x0db"),
+"sword_attack": SubResource("Animation_tkufx"),
 "walk_down": SubResource("Animation_rxi6e"),
 "walk_left": SubResource("Animation_glps0"),
 "walk_right": SubResource("Animation_ecuck"),
@@ -317,6 +324,8 @@ y_sort_enabled = true
 script = SubResource("GDScript_usmdi")
 speed = 60
 metadata/_edit_horizontal_guides_ = [-87.0]
+
+[node name="weapon" parent="." instance=ExtResource("1_1w484")]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 clip_children = 2

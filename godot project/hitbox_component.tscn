@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://cy3yvr68wkmiu"]
+
+[ext_resource type="Script" path="res://enemies/hitbox_component.gd" id="1_m1tbx"]
+
+[node name="hitbox_component" type="Area2D" node_paths=PackedStringArray("health_component")]
+light_mask = 3
+visibility_layer = 3
+script = ExtResource("1_m1tbx")
+health_component = NodePath("../health_component")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
