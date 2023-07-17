@@ -1,8 +1,10 @@
-[gd_scene load_steps=22 format=3 uid="uid://u6nx76c4dwew"]
+[gd_scene load_steps=25 format=3 uid="uid://u6nx76c4dwew"]
 
 [ext_resource type="Script" path="res://enemies/lizard/lizard.gd" id="1_4ynd1"]
 [ext_resource type="Texture2D" uid="uid://3wmcbgcqhrte" path="res://enemies/lizard/lizard.png" id="2_uap12"]
 [ext_resource type="PackedScene" uid="uid://csrubj1m80hl3" path="res://enemies/EnemyRaycast.tscn" id="3_u75qj"]
+[ext_resource type="PackedScene" uid="uid://cj3xuxxknlxt8" path="res://scenes/health_component.tscn" id="4_b7eoi"]
+[ext_resource type="PackedScene" uid="uid://desk0jgj56duh" path="res://scenes/hitbox_component.tscn" id="5_6g8ce"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2ix1v"]
 atlas = ExtResource("2_uap12")
@@ -142,6 +144,9 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0j4xy"]
 size = Vector2(16, 4)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_27lsb"]
+size = Vector2(11, 14)
+
 [node name="Lizard" type="CharacterBody2D"]
 script = ExtResource("1_4ynd1")
 speed = 0
@@ -164,4 +169,14 @@ target_position = Vector2(100, 0)
 collide_with_areas = true
 
 [node name="Marker2D" type="Marker2D" parent="."]
-position = Vector2(0, -6)
+position = Vector2(3, -2)
+
+[node name="health_component" parent="." instance=ExtResource("4_b7eoi")]
+
+[node name="hitbox_component" parent="." instance=ExtResource("5_6g8ce")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox_component"]
+light_mask = 3
+visibility_layer = 3
+position = Vector2(-0.5, -7)
+shape = SubResource("RectangleShape2D_27lsb")
