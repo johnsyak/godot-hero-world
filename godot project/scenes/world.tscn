@@ -4222,11 +4222,11 @@ layer_3/z_index = 0
 layer_3/tile_data = PackedInt32Array(327689, 2, 65536, 65548, 2, 65536, 655370, 2, 65536, 655366, 2, 65536, 196624, 2, 131072, 65546, 2, 131072, 524303, 2, 131072, 327684, 2, 131072)
 
 [node name="Player" parent="TileMap" groups=["player_group"] instance=ExtResource("1_uaqgb")]
-position = Vector2(401, 105)
+position = Vector2(385, 106)
 run_speed = 3.0
 
 [node name="follow cam" type="Camera2D" parent="TileMap/Player" node_paths=PackedStringArray("tilemap")]
-position = Vector2(0, -3)
+position = Vector2(0, -4)
 script = ExtResource("5_cv8fh")
 tilemap = NodePath("../..")
 
