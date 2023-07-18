@@ -1218,7 +1218,7 @@ size = Vector2(16, 16)
 [node name="building" type="Node2D"]
 
 [node name="TileMap" type="TileMap" parent="."]
-position = Vector2(-1, -2)
+position = Vector2(-195, -202)
 tile_set = SubResource("TileSet_5in5o")
 format = 2
 layer_0/name = "Ground"
@@ -1232,7 +1232,7 @@ layer_1/z_index = 0
 layer_1/tile_data = PackedInt32Array(458756, 589829, 3)
 
 [node name="Player" parent="TileMap" groups=["player_group"] instance=ExtResource("5_wnmnl")]
-position = Vector2(72, 110)
+position = Vector2(70, 105)
 run_speed = 3.0
 
 [node name="follow cam" type="Camera2D" parent="TileMap/Player" node_paths=PackedStringArray("tilemap") groups=["camera"]]
