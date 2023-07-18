@@ -1,7 +1,7 @@
 extends CanvasLayer
 
-const WORLD = ("res://scenes/world.tscn")
-const BUILDING = ("res://scenes/building.tscn")
+const WORLD = preload("res://scenes/world.tscn")
+const BUILDING = preload("res://scenes/building.tscn")
 
 func _ready():
 	hide_elements()
@@ -22,7 +22,14 @@ func show_elements():
 	get_node("ColorRect").show()
 	get_node("Label").show()
 
-func set_player_position(stage_path, player_position):
-	get_tree().change_scene_to_file(stage_path)
+func set_player_position(scene, player_position):
+	var stage = scene.instantiate()
+	get_tree().get_root().get_child(1).free()
+	get_tree().get_root().add_child(stage)
+	
+	var player = stage.get_tree().get_nodes_in_group("player_group")[0]
+	player.set_global_position(player_position)
+
+
 	
 
