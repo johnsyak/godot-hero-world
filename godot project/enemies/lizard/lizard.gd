@@ -9,7 +9,7 @@ extends CharacterBody2D
 @onready var animations = $AnimatedSprite2D
 @onready var enemy_raycast = $EnemyRaycast
 const projectile_path = preload("res://projectiles/projectile.tscn")
-const DirectionUtil = preload("res://overlap/DirectionUtil.gd")
+const DirectionUtil = preload("res://components/DirectionUtil.gd")
 
 var tether_pos
 var start_pos

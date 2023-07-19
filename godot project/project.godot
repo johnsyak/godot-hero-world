@@ -11,13 +11,13 @@ config_version=5
 [application]
 
 config/name="hello heroworld"
-run/main_scene="res://scenes/world.tscn"
+run/main_scene="res://scenes/maps/world.tscn"
 config/features=PackedStringArray("4.0", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [autoload]
 
-StageManager="*res://scenes/stage_manager.tscn"
+StageManager="*res://scenes/maps/stage_manager.tscn"
 
 [display]
 

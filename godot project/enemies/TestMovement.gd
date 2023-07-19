@@ -1,6 +1,6 @@
 extends Node2D
 
-var DirectionUtil = preload("res://overlap/DirectionUtil.gd")
+var DirectionUtil = preload("res://components/DirectionUtil.gd")
 
 
 func changeDirection(endPosition: Vector2, startPosition: Vector2):

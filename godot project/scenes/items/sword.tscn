@@ -1,8 +1,8 @@
 [gd_scene load_steps=8 format=3 uid="uid://ddf7t6rsxlou1"]
 
-[ext_resource type="PackedScene" uid="uid://by8p0a777p8pf" path="res://scenes/collectible.tscn" id="1_m8jrj"]
+[ext_resource type="PackedScene" uid="uid://by8p0a777p8pf" path="res://scenes/items/collectible.tscn" id="1_m8jrj"]
 [ext_resource type="Texture2D" uid="uid://ggdsbstvy0xu" path="res://art/Sword.png" id="2_5lcng"]
-[ext_resource type="Script" path="res://scenes/sword.gd" id="2_8eqo3"]
+[ext_resource type="Script" path="res://scenes/items/sword.gd" id="2_8eqo3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n5v0l"]
 resource_local_to_scene = true

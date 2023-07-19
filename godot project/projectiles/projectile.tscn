@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://bpflpfnagkjk8" path="res://projectiles/freball/Fireball.png" id="1_lg8sw"]
 [ext_resource type="Script" path="res://projectiles/projectile.gd" id="1_msxul"]
-[ext_resource type="PackedScene" uid="uid://bl7o65oj0gko5" path="res://overlap/hit_box.tscn" id="3_kofx8"]
+[ext_resource type="PackedScene" uid="uid://bl7o65oj0gko5" path="res://components/hit_box.tscn" id="3_kofx8"]
 
 [node name="Projectile" type="Area2D"]
 z_index = 1

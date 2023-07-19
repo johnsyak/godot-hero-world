@@ -1,22 +1,22 @@
 [gd_scene load_steps=22 format=3 uid="uid://dy4uju250tabf"]
 
-[ext_resource type="Script" path="res://scenes/world.gd" id="1_0fric"]
-[ext_resource type="Texture2D" uid="uid://c21xuldsw85k3" path="res://art/TilesetFloor.png" id="1_atja7"]
-[ext_resource type="PackedScene" uid="uid://cbsptxb38q668" path="res://Player/player.tscn" id="1_uaqgb"]
-[ext_resource type="Texture2D" uid="uid://dfaestbwx1x0x" path="res://art/TilesetNature.png" id="2_dnigq"]
-[ext_resource type="Texture2D" uid="uid://4b0tqchhjyt3" path="res://art/animatedFlower.png" id="3_cfjkr"]
-[ext_resource type="PackedScene" uid="uid://c0hsvnq4y1uq8" path="res://scenes/lifepot.tscn" id="4_a5l0i"]
-[ext_resource type="Script" path="res://scenes/follow cam.gd" id="5_cv8fh"]
-[ext_resource type="PackedScene" uid="uid://ddf7t6rsxlou1" path="res://scenes/sword.tscn" id="5_jtl0y"]
-[ext_resource type="Texture2D" uid="uid://b037k3y7o348k" path="res://art/TilesetHouse.png" id="7_crtud"]
-[ext_resource type="PackedScene" uid="uid://u6nx76c4dwew" path="res://enemies/lizard/lizard.tscn" id="7_qofcw"]
-[ext_resource type="PackedScene" uid="uid://cyq4hr81ki25m" path="res://enemies/slime/slime.tscn" id="8_yrrwn"]
-[ext_resource type="PackedScene" uid="uid://c3uf31p64ahmn" path="res://scenes/hearts_container.tscn" id="9_h33a0"]
-[ext_resource type="PackedScene" uid="uid://bdcffk40jl4kl" path="res://enemies/TestMonster/Mushroom.tscn" id="11_1nwd0"]
-[ext_resource type="Script" path="res://scenes/Doorway.gd" id="13_axi5d"]
+[ext_resource type="Script" path="res://scenes/maps/world.gd" id="1_dehuu"]
+[ext_resource type="Texture2D" uid="uid://c21xuldsw85k3" path="res://art/TilesetFloor.png" id="2_dq8jg"]
+[ext_resource type="Texture2D" uid="uid://dfaestbwx1x0x" path="res://art/TilesetNature.png" id="3_glwf2"]
+[ext_resource type="PackedScene" uid="uid://c0hsvnq4y1uq8" path="res://scenes/items/lifepot.tscn" id="4_kmrm2"]
+[ext_resource type="PackedScene" uid="uid://ddf7t6rsxlou1" path="res://scenes/items/sword.tscn" id="5_f58we"]
+[ext_resource type="Texture2D" uid="uid://4b0tqchhjyt3" path="res://art/animatedFlower.png" id="6_kenle"]
+[ext_resource type="Texture2D" uid="uid://b037k3y7o348k" path="res://art/TilesetHouse.png" id="7_gb3c2"]
+[ext_resource type="PackedScene" uid="uid://cbsptxb38q668" path="res://Player/player.tscn" id="8_y0ixf"]
+[ext_resource type="Script" path="res://scenes/follow cam.gd" id="9_no823"]
+[ext_resource type="PackedScene" uid="uid://u6nx76c4dwew" path="res://enemies/lizard/lizard.tscn" id="10_chsxl"]
+[ext_resource type="PackedScene" uid="uid://cyq4hr81ki25m" path="res://enemies/slime/slime.tscn" id="11_m1u6e"]
+[ext_resource type="PackedScene" uid="uid://bdcffk40jl4kl" path="res://enemies/TestMonster/Mushroom.tscn" id="12_8v2ln"]
+[ext_resource type="PackedScene" uid="uid://c3uf31p64ahmn" path="res://scenes/menus/hearts_container.tscn" id="13_2k46g"]
+[ext_resource type="Script" path="res://scenes/maps/Doorway.gd" id="14_tq0m2"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_eplj6"]
-texture = ExtResource("1_atja7")
+texture = ExtResource("2_dq8jg")
 0:0/0 = 0
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:0/0/physics_layer_0/angular_velocity = 0.0
@@ -1393,7 +1393,7 @@ texture = ExtResource("1_atja7")
 19:25/0/physics_layer_0/angular_velocity = 0.0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_87q5n"]
-texture = ExtResource("2_dnigq")
+texture = ExtResource("3_glwf2")
 2:0/0 = 0
 2:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 2:0/0/physics_layer_0/angular_velocity = 0.0
@@ -2198,11 +2198,11 @@ texture = ExtResource("2_dnigq")
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_du8fw"]
 resource_name = "Collectables"
-scenes/1/scene = ExtResource("4_a5l0i")
-scenes/2/scene = ExtResource("5_jtl0y")
+scenes/1/scene = ExtResource("4_kmrm2")
+scenes/2/scene = ExtResource("5_f58we")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e7olo"]
-texture = ExtResource("3_cfjkr")
+texture = ExtResource("6_kenle")
 0:0/animation_speed = 0.3
 0:0/animation_frame_0/duration = 0.2
 0:0/animation_frame_1/duration = 0.2
@@ -2213,7 +2213,7 @@ texture = ExtResource("3_cfjkr")
 0:0/0/physics_layer_0/angular_velocity = 0.0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wn0hh"]
-texture = ExtResource("7_crtud")
+texture = ExtResource("7_gb3c2")
 0:0/0 = 0
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:0/0/physics_layer_0/angular_velocity = 0.0
@@ -4188,7 +4188,7 @@ sources/4 = SubResource("TileSetAtlasSource_wn0hh")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kysab"]
 
 [node name="World" type="Node2D"]
-script = ExtResource("1_0fric")
+script = ExtResource("1_dehuu")
 
 [node name="TileMap" type="TileMap" parent="."]
 light_mask = 3
@@ -4221,22 +4221,24 @@ layer_3/y_sort_origin = 0
 layer_3/z_index = 0
 layer_3/tile_data = PackedInt32Array(327689, 2, 65536, 65548, 2, 65536, 655370, 2, 65536, 655366, 2, 65536, 196624, 2, 131072, 65546, 2, 131072, 524303, 2, 131072, 327684, 2, 131072)
 
-[node name="Player" parent="TileMap" groups=["player_group"] instance=ExtResource("1_uaqgb")]
+[node name="Player" parent="TileMap" groups=["player_group"] instance=ExtResource("8_y0ixf")]
 position = Vector2(310, 138)
 run_speed = 3.0
 
 [node name="follow cam" type="Camera2D" parent="TileMap/Player" node_paths=PackedStringArray("tilemap")]
 position = Vector2(0, -4)
-script = ExtResource("5_cv8fh")
+script = ExtResource("9_no823")
 tilemap = NodePath("../..")
 
-[node name="Lizard" parent="TileMap" instance=ExtResource("7_qofcw")]
+[node name="Lizard" parent="TileMap" instance=ExtResource("10_chsxl")]
 position = Vector2(175, 106)
 collision_layer = 3
 speed = 30
 limit = 2.0
+tether_max = 2
+tile_move_dist = 3
 
-[node name="slime" parent="TileMap" node_paths=PackedStringArray("endPoint") instance=ExtResource("8_yrrwn")]
+[node name="slime" parent="TileMap" node_paths=PackedStringArray("endPoint") instance=ExtResource("11_m1u6e")]
 position = Vector2(196, 125)
 speed = 30
 endPoint = NodePath("Marker2D")
@@ -4244,7 +4246,7 @@ endPoint = NodePath("Marker2D")
 [node name="Marker2D" type="Marker2D" parent="TileMap/slime"]
 position = Vector2(53, 35)
 
-[node name="mushroom" parent="TileMap" node_paths=PackedStringArray("endPoint") instance=ExtResource("11_1nwd0")]
+[node name="mushroom" parent="TileMap" node_paths=PackedStringArray("endPoint") instance=ExtResource("12_8v2ln")]
 position = Vector2(240, 53)
 endPoint = NodePath("Marker2D")
 
@@ -4253,7 +4255,7 @@ position = Vector2(-38, -6)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="hearts_container" parent="CanvasLayer" instance=ExtResource("9_h33a0")]
+[node name="hearts_container" parent="CanvasLayer" instance=ExtResource("13_2k46g")]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -4263,7 +4265,7 @@ grow_horizontal = 0
 
 [node name="Doorway" type="Area2D" parent="."]
 position = Vector2(306, 61)
-script = ExtResource("13_axi5d")
+script = ExtResource("14_tq0m2")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Doorway"]
 z_index = 1

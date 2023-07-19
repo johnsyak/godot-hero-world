@@ -6,7 +6,7 @@ extends CharacterBody2D
 
 @onready var animations = $AnimationPlayer
 
-const DirectionUtil = preload("res://overlap/DirectionUtil.gd")
+const DirectionUtil = preload("res://components/DirectionUtil.gd")
 
 var startPosition
 var endPosition

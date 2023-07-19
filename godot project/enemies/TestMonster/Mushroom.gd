@@ -6,7 +6,7 @@ extends CharacterBody2D
 
 @onready var animations = $AnimatedSprite2D
 
-const DirectionUtil = preload("res://overlap/DirectionUtil.gd")
+const DirectionUtil = preload("res://components/DirectionUtil.gd")
 const TestMovement = preload("res://enemies/TestMovement.gd")
 
 var startPosition

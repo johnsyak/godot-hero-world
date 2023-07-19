@@ -1,7 +1,7 @@
 extends CanvasLayer
 
-const WORLD = preload("res://scenes/world.tscn")
-const BUILDING = preload("res://scenes/building.tscn")
+const WORLD = preload("res://scenes/maps/world.tscn")
+const BUILDING = preload("res://scenes/maps/building.tscn")
 
 func _ready():
 	hide_elements()

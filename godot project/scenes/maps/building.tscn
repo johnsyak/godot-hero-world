@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://08ngi411op18" path="res://art/TilesetInterior.png" id="1_a7fww"]
 [ext_resource type="Texture2D" uid="uid://b1n78m6a20alq" path="res://art/TilesetInteriorFloor.png" id="2_6otn8"]
 [ext_resource type="Texture2D" uid="uid://b037k3y7o348k" path="res://art/TilesetHouse.png" id="3_alcxi"]
-[ext_resource type="Script" path="res://scenes/Interiordoorway.gd" id="4_o0rsw"]
+[ext_resource type="Script" path="res://scenes/maps/Interiordoorway.gd" id="4_o0rsw"]
 [ext_resource type="Script" path="res://scenes/follow cam.gd" id="5_1bypx"]
 [ext_resource type="PackedScene" uid="uid://cbsptxb38q668" path="res://Player/player.tscn" id="5_wnmnl"]
 
