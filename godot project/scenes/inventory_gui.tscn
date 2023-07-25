@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://dpw4fuxvsac5a"]
+
+[ext_resource type="Texture2D" uid="uid://hwkxqmpstjb4" path="res://art/InventoryRect.png" id="1_l8lan"]
+
+[node name="InventoryGUI" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_l8lan")
+patch_margin_left = 6
+patch_margin_top = 6
+patch_margin_right = 6
+patch_margin_bottom = 6
