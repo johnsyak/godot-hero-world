@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://dy4uju250tabf"]
+[gd_scene load_steps=24 format=3 uid="uid://dy4uju250tabf"]
 
 [ext_resource type="Script" path="res://scenes/maps/world.gd" id="1_dehuu"]
 [ext_resource type="Texture2D" uid="uid://c21xuldsw85k3" path="res://art/TilesetFloor.png" id="2_dq8jg"]
@@ -13,6 +13,8 @@
 [ext_resource type="PackedScene" uid="uid://cyq4hr81ki25m" path="res://enemies/slime/slime.tscn" id="11_m1u6e"]
 [ext_resource type="PackedScene" uid="uid://bdcffk40jl4kl" path="res://enemies/TestMonster/Mushroom.tscn" id="12_8v2ln"]
 [ext_resource type="PackedScene" uid="uid://c3uf31p64ahmn" path="res://scenes/menus/hearts_container.tscn" id="13_2k46g"]
+[ext_resource type="Script" path="res://scenes/maps/CanvasLayer.gd" id="13_c22ca"]
+[ext_resource type="PackedScene" uid="uid://dpw4fuxvsac5a" path="res://scenes/inventory_gui.tscn" id="14_heco2"]
 [ext_resource type="Script" path="res://scenes/maps/Doorway.gd" id="14_tq0m2"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_eplj6"]
@@ -4235,8 +4237,6 @@ position = Vector2(175, 106)
 collision_layer = 3
 speed = 30
 limit = 2.0
-tether_max = 2
-tile_move_dist = 3
 
 [node name="slime" parent="TileMap" node_paths=PackedStringArray("endPoint") instance=ExtResource("11_m1u6e")]
 position = Vector2(196, 125)
@@ -4254,6 +4254,8 @@ endPoint = NodePath("Marker2D")
 position = Vector2(-38, -6)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+process_mode = 3
+script = ExtResource("13_c22ca")
 
 [node name="hearts_container" parent="CanvasLayer" instance=ExtResource("13_2k46g")]
 anchors_preset = 1
@@ -4262,6 +4264,11 @@ anchor_right = 1.0
 offset_left = -40.0
 offset_right = 0.0
 grow_horizontal = 0
+
+[node name="InventoryGUI" parent="CanvasLayer" instance=ExtResource("14_heco2")]
+offset_left = 210.0
+offset_top = 3.0
+offset_right = 210.0
 
 [node name="Doorway" type="Area2D" parent="."]
 position = Vector2(306, 61)
@@ -4272,5 +4279,7 @@ z_index = 1
 position = Vector2(86, -10)
 shape = SubResource("RectangleShape2D_kysab")
 
+[connection signal="closed" from="CanvasLayer/InventoryGUI" to="." method="_on_inventory_gui_closed"]
+[connection signal="opened" from="CanvasLayer/InventoryGUI" to="." method="_on_inventory_gui_opened"]
 [connection signal="body_entered" from="Doorway" to="Doorway" method="_on_body_entered"]
 [connection signal="body_exited" from="Doorway" to="Doorway" method="_on_body_exited"]
